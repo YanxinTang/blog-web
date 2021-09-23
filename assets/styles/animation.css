@@ -1,0 +1,21 @@
+.fade-in-down-appear, .fade-in-down-enter {
+  opacity: 0.5;
+  transform: translateY(-20px);
+}
+
+.fade-in-down-appear-active, .fade-in-down-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 200ms ease-in;
+}
+
+.fade-in-down-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.fade-in-down-exit-active {
+  transform: translateY(-20px);
+  opacity: 0.5;
+  transition: all 200ms ease-in;
+}

@@ -1,0 +1,32 @@
+.success {
+  @apply bg-green-100 border-green-400 text-green-700;
+}
+
+.success svg {
+  @apply text-green-500;
+}
+
+.info {
+  @apply bg-gray-100 border-gray-400 text-gray-700;
+}
+
+.info svg {
+  @apply text-gray-500;
+}
+
+
+.warning {
+  @apply bg-yellow-100 border-yellow-400 text-yellow-700;
+}
+
+.warning svg {
+  @apply text-yellow-500;
+}
+
+.error {
+  @apply bg-red-100 border-red-400 text-red-700;
+}
+
+.error svg {
+  @apply text-red-500;
+}

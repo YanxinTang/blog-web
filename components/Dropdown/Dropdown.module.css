@@ -1,0 +1,7 @@
+.dropdown {
+  @apply flex justify-start content-center;
+}
+
+.dropdownMenu {
+
+}
