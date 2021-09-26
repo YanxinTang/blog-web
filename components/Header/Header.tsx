@@ -40,7 +40,7 @@ export default function Header() {
 
   return (
     <div className={styles.header}>
-      <nav className="container mx-auto flex flex-row flex-nowrap justify-between items-center xl:max-w-5xl">
+      <nav className="container mx-auto flex flex-row flex-nowrap justify-between items-center">
         <Link href="/">
           <a className={styles.brand}>
             <img src="/logo.png" alt="logo" />

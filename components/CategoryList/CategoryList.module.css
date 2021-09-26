@@ -1,0 +1,25 @@
+.category {
+  @apply flex
+    justify-start
+    p-2
+    my-2
+    rounded-md
+    hover:text-green-300;
+}
+
+.categoryActive {
+  @apply text-green-400
+    bg-green-100;
+}
+
+.categoryActive .dot {
+  @apply bg-green-400;
+}
+
+.dot {
+  @apply h-2 w-2 m-2 rounded-full bg-gray-300;
+}
+
+.category:hover .dot {
+  @apply bg-green-300;
+}

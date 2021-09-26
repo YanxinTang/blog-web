@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import SidebarAdmin from "@components/Sidebar/Admin";
+import React, { useState, useEffect } from 'react';
+import SidebarAdmin from '@components/Sidebar/Admin';
 import Header from '@components/Header';
 
 export interface LayoutProps {
@@ -14,11 +14,7 @@ export default function AdminLayout(props: LayoutProps) {
 
   const handleToggleSidebar = (open = !sidebarOpen) => {
     setSidebarOpen(open);
-  }
-
-  useEffect(() => {
-
-  }, [sidebarOpen])
+  };
 
   return (
     <div className={props.className}>
@@ -28,9 +24,7 @@ export default function AdminLayout(props: LayoutProps) {
           <div className="flex-1 flex flex-col overflow-hidden">
             <Header.Admin title={title} onToggle={handleToggleSidebar}></Header.Admin>
             <main className="flex-1 overflow-x-hidden overflow-y-auto">
-              <div className="container mx-auto px-6 py-8">
-                {props.children}
-              </div>
+              <div className="container mx-auto px-6 py-8">{props.children}</div>
             </main>
           </div>
         </div>

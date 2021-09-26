@@ -2,6 +2,7 @@
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
   padding: 20px 0;
+  @apply px-6 rounded-md bg-white;
 }
 
 .articleHeader {
@@ -39,8 +40,8 @@
   padding-top: 1rem;
 }
 
-.article-body, .article-summary {
+.article-body,
+.article-summary {
   color: #555;
   margin: 1rem 0;
 }
-

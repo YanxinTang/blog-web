@@ -28,17 +28,49 @@ export const getServerSideProps: GetServerSideProps = shouldWithAuth(async ({ qu
       perpage: 0,
     },
   };
+
+  const { categoryID, ...restQuery } = query;
   try {
     const categoriesRequest = http.get<CategoriesResponse>('/api/categories');
-    const articlesRequest = http.get<ArticlesResponse>('/api/articles', { params: { ...query } });
-    const [categoriesResponse, articlesResponse] = await Promise.all([categoriesRequest, articlesRequest]);
-    data.categories = categoriesResponse.data;
-    data.articles = articlesResponse.data.articles;
-    data.pagination = articlesResponse.data.pagination;
+    const articlesRequest = http.get<ArticlesResponse>(`/api/categories/${categoryID}/articles`, {
+      params: { ...restQuery },
+    });
+    const [categoriesResponse, articlesResponse] = await Promise.allSettled([categoriesRequest, articlesRequest]);
+
+    // 获取所有分类失败，就应该直接返回 404
+    if (categoriesResponse.status === 'rejected') {
+      return {
+        notFound: true,
+      };
+    }
+    data.categories = categoriesResponse.value.data;
+    // 获取文章成功，则覆盖初始化的值。若获取失败，不需要处理
+    if (articlesResponse.status === 'fulfilled') {
+      data.articles = articlesResponse.value.data.articles;
+      data.pagination = articlesResponse.value.data.pagination;
+    }
   } catch {
-    // do nothing
+    // 不要把异常上抛来避免被 next 重定向到错误页面去
   }
-  return { props: { data } };
+
+  const cid = parseInt(categoryID as string);
+  const category = data.categories.find(c => c.id == cid);
+
+  // 如果没有找到当前的分类，直接返回 404
+  if (category === undefined) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      data,
+      meta: {
+        title: category.name,
+      },
+    },
+  };
 });
 
 const paginationItemRender: ItemRender = (page, element) => {
@@ -54,7 +86,7 @@ interface IndexProps {
   data: ServerSideData;
 }
 
-function Index(props: IndexProps) {
+function Categories(props: IndexProps) {
   const { data } = props;
 
   return (
@@ -67,13 +99,14 @@ function Index(props: IndexProps) {
             <Image src={empty} alt="空空如也"></Image>
           )}
         </div>
-        <div className="flex-grow-0 my-4 md:my-0  md:ml-4 md:w-60">
+        <div className="flex-grow-0 my-4 md:my-0 md:ml-4 md:w-60">
           <CategoryList categories={props.data.categories} />
         </div>
       </main>
+
       <Pagination pagination={data.pagination} itemRender={paginationItemRender}></Pagination>
     </>
   );
 }
 
-export default layout(Index);
+export default layout(Categories);
