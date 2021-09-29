@@ -2,8 +2,7 @@ import React from 'react';
 import { mergeClassNames } from '@util';
 import styles from './Button.module.scss';
 
-interface ButtonProps {
-  children?: React.ReactNode;
+type ButtonProps = React.PropsWithChildren<{
   className?: string;
   type?: 'gray' | 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink';
   ghost?: boolean;
@@ -11,9 +10,9 @@ interface ButtonProps {
   htmlType?: 'submit' | 'reset' | 'button';
   htmlForm?: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+}>;
 
-const Button = (props: ButtonProps) => {
+const Button = (props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
   const { children, className, block, ghost = false, type = 'info' } = props;
 
   const newClassName = mergeClassNames(
@@ -25,10 +24,10 @@ const Button = (props: ButtonProps) => {
   );
 
   return (
-    <button className={newClassName} type={props.htmlType} onClick={props.onClick} form={props.htmlForm}>
+    <button ref={ref} className={newClassName} type={props.htmlType} onClick={props.onClick} form={props.htmlForm}>
       {children}
     </button>
   );
 };
 
-export default Button;
+export default React.forwardRef<HTMLButtonElement, ButtonProps>(Button);
