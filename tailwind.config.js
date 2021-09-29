@@ -5,7 +5,11 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    extend: {
+      ringColor: ['focus-visible'],
+      ringOffsetWidth: ['focus-visible'],
+      ringWidth: ['focus-visible'],
+    },
   },
   plugins: [
     require('@tailwindcss/forms')

@@ -98,10 +98,10 @@ function NewArticle(props: NewArticleProps) {
         ></textarea>
       </div>
       <div>
-        <Button type="submit" className="w-3/4" block>
+        <Button type="indigo" htmlType="submit" className="w-3/4" block>
           发布
         </Button>
-        <Button type="button" className="mt-2" block onClick={handleDraft}>
+        <Button type="yellow" htmlType="button" className="mt-2" ghost block onClick={handleDraft}>
           存草稿
         </Button>
       </div>

@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
-import Layout from 'layout/Layout';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { State } from '@store';
 import Article from '@components/Article';
 import Input from '@components/Input';
 import Button from '@components/Button';
@@ -58,11 +61,12 @@ function ArticleLayout(props: ArticleProps) {
   const {
     data: { article },
   } = props;
-
+  const router = useRouter();
   const [comments, setComments] = useState(props.data.comments);
   const [username, setUsername] = useState('');
   const [content, setContent] = useState('');
   const form = useRef<HTMLFormElement>(null);
+  const user = useSelector<State, User | null>(state => state.auth.user);
 
   useEffect(() => {
     const username = localStorage.getItem('username') ?? '';
@@ -70,6 +74,16 @@ function ArticleLayout(props: ArticleProps) {
   }, []);
 
   const commentList = comments.map(c => <Comment key={c.id} comment={c} />);
+
+  const handleDelete = async () => {
+    try {
+      await clientHttp.delete(`/api/admin/articles/${article.id}`);
+      message.success('删除成功');
+      router.push('/');
+    } catch (e) {
+      message.error(errorHandler(e));
+    }
+  };
 
   const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -87,38 +101,50 @@ function ArticleLayout(props: ArticleProps) {
   };
 
   return (
-    <>
-      <div className="border-solid border-gray-100 mb-4">
-        <Article {...article}></Article>
+    <main className="flex flex-wrap flex-col items-stretch gap-4 md:items-start md:flex-row">
+      <div className="flex-grow flex flex-col gap-4">
+        <div className="border-solid border-gray-100">
+          <Article {...article}></Article>
+        </div>
+        {user && (
+          <div className="space-x-2">
+            <Link href={`/home/articles/edit/${article.id}`}>
+              <Button type="indigo">编辑</Button>
+            </Link>
+            <Button type="red" ghost onClick={handleDelete}>
+              删除
+            </Button>
+          </div>
+        )}
+        <div>
+          <form className="space-y-4" onSubmit={handleComment} ref={form}>
+            <div>
+              <Input
+                type="text"
+                placeholder="昵称"
+                required
+                value={username}
+                onChange={event => setUsername(event.target.value)}
+              />
+            </div>
+            <div>
+              <Input.Textarea
+                placeholder="写点什么吧..."
+                required
+                value={content}
+                onChange={event => setContent(event.target.value)}
+              ></Input.Textarea>
+            </div>
+            <div>
+              <Button type="indigo" htmlType="submit">
+                评论
+              </Button>
+            </div>
+          </form>
+          <div className="divide-y">{commentList}</div>
+        </div>
       </div>
-
-      <div>
-        <form className="space-y-4" onSubmit={handleComment} ref={form}>
-          <div>
-            <Input
-              type="text"
-              placeholder="昵称"
-              required
-              value={username}
-              onChange={event => setUsername(event.target.value)}
-            />
-          </div>
-          <div>
-            <Input.Textarea
-              placeholder="写点什么吧..."
-              required
-              value={content}
-              onChange={event => setContent(event.target.value)}
-            ></Input.Textarea>
-          </div>
-          <div>
-            <Button type="submit">评论</Button>
-          </div>
-        </form>
-      </div>
-
-      <div className="divide-y">{commentList}</div>
-    </>
+    </main>
   );
 }
 

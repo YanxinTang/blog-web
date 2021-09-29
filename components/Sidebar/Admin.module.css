@@ -1,0 +1,7 @@
+.menu {
+  @apply py-2 text-sm text-gray-600 hover:text-gray-700 hover:bg-gray-200 rounded;
+}
+
+.menu.active {
+  @apply text-white bg-indigo-600 hover:text-white hover:bg-indigo-700;
+}

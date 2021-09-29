@@ -103,7 +103,6 @@ function Categories(props: IndexProps) {
           <CategoryList categories={props.data.categories} />
         </div>
       </main>
-
       <Pagination pagination={data.pagination} itemRender={paginationItemRender}></Pagination>
     </>
   );

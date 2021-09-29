@@ -67,7 +67,7 @@ function Index(props: IndexProps) {
             <Image src={empty} alt="空空如也"></Image>
           )}
         </div>
-        <div className="flex-grow-0 my-4 md:my-0  md:ml-4 md:w-60">
+        <div className="flex-grow-0 my-4 md:my-0 md:ml-4 md:w-60">
           <CategoryList categories={props.data.categories} />
         </div>
       </main>

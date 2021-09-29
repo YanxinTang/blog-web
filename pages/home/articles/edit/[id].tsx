@@ -8,20 +8,20 @@ import { useRouter } from 'next/router';
 import { layoutAdmin } from 'layout';
 
 type CategoriesResponse = Category[];
-type DraftResponse = Article;
+type ArticleResponse = Article;
 
 export const getServerSideProps = withAuthServerSideProps(async ctx => {
   const { id } = ctx.query;
   const response = await Promise.all([
     newHttp(ctx).get<CategoriesResponse>('/api/categories'),
-    newHttp(ctx).get<DraftResponse>(`/api/admin/drafts/${id}`),
+    newHttp(ctx).get<ArticleResponse>(`/api/articles/${id}`),
   ]);
 
   return {
     props: {
-      data: { categories: response[0].data, draft: response[1].data },
+      data: { categories: response[0].data, article: response[1].data },
       meta: {
-        title: '修改草稿',
+        title: '编辑',
       },
     },
   };
@@ -29,35 +29,26 @@ export const getServerSideProps = withAuthServerSideProps(async ctx => {
 
 interface NewArticleProps {
   data: {
-    draft: DraftResponse;
+    article: ArticleResponse;
     categories: CategoriesResponse;
   };
 }
 
 function NewArticle(props: NewArticleProps) {
   const {
-    data: { draft, categories },
+    data: { article, categories },
   } = props;
-  const [title, setTitle] = useState(draft.title);
-  const [categoryID, setCategoryID] = useState(draft.categoryID);
-  const [content, setContent] = useState(draft.content);
+  const [title, setTitle] = useState(article.title);
+  const [categoryID, setCategoryID] = useState(article.categoryID);
+  const [content, setContent] = useState(article.content);
   const router = useRouter();
 
   const handlePublish = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await clientHttp.post(`/api/admin/drafts/${draft.id}`);
+      await clientHttp.put(`/api/admin/articles/${article.id}`, { title, categoryID, content });
       message.success({ message: '发布成功' });
-      router.push('/home/drafts');
-    } catch (error) {
-      message.error({ message: errorHandler(error) });
-    }
-  };
-
-  const handleSaveDraft = async () => {
-    try {
-      await clientHttp.put<Article>(`/api/admin/drafts/${draft.id}`, { title, categoryID, content });
-      message.success({ message: '保存成功' });
+      router.push(`/articles/${article.id}`);
     } catch (error) {
       message.error({ message: errorHandler(error) });
     }
@@ -75,21 +66,13 @@ function NewArticle(props: NewArticleProps) {
         <ol className="list-reset flex text-grey-dark">
           <li>
             <a href="#" className="text-blue font-bold">
-              草稿箱
-            </a>
-          </li>
-          <li>
-            <span className="mx-2">/</span>
-          </li>
-          <li>
-            <a href="#" className="text-blue font-bold">
               编辑
             </a>
           </li>
           <li>
             <span className="mx-2">/</span>
           </li>
-          <li>{draft.title}</li>
+          <li>{article.title}</li>
         </ol>
       </nav>
       <form className="space-y-4" onSubmit={handlePublish}>
@@ -127,9 +110,6 @@ function NewArticle(props: NewArticleProps) {
         <div className="space-y-2">
           <Button type="indigo" htmlType="submit" block>
             发布
-          </Button>
-          <Button type="yellow" htmlType="button" block ghost onClick={handleSaveDraft}>
-            存草稿
           </Button>
         </div>
       </form>

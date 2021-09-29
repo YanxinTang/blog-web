@@ -38,9 +38,11 @@ const Item = (props: ItemProps) => {
       <td className="px-6 py-4 whitespace-nowrap">{props.category.name}</td>
       <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
         <Link href={`/home/drafts/edit/${props.id}`}>
-          <Button>编辑</Button>
+          <Button type="indigo">编辑</Button>
         </Link>
-        <Button onClick={() => props.onDelete(props.id)}>删除</Button>
+        <Button type="red" ghost onClick={() => props.onDelete(props.id)}>
+          删除
+        </Button>
       </td>
     </tr>
   );

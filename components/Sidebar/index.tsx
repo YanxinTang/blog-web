@@ -41,7 +41,7 @@ export default function Sidebar(props: SidebarProps) {
           <span className="text-gray-800 dark:text-white text-2xl font-semibold">Dashboard</span>
         </div>
       </div>
-      <nav className="flex flex-col mt-10 px-4 text-center">{props.children}</nav>
+      <div>{props.children}</div>
     </div>
   );
 

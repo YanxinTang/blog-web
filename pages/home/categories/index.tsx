@@ -60,8 +60,12 @@ const Item = (props: ItemProps) => {
         )}
       </td>
       <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
-        <Button onClick={handleEditMode}>编辑</Button>
-        <Button onClick={() => props.onDelete(props.id)}>删除</Button>
+        <Button type="indigo" onClick={handleEditMode}>
+          编辑
+        </Button>
+        <Button type="red" ghost onClick={() => props.onDelete(props.id)}>
+          删除
+        </Button>
       </td>
     </tr>
   );
@@ -148,7 +152,7 @@ function Categories(props: CategoriesProps) {
                     />
                   </td>
                   <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
-                    <Button form="createCategoryForm" type="submit">
+                    <Button type="indigo" htmlForm="createCategoryForm" htmlType="submit">
                       新增
                     </Button>
                   </td>
