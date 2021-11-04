@@ -101,13 +101,13 @@ function ArticleLayout(props: ArticleProps) {
   };
 
   return (
-    <main className="flex flex-wrap flex-col items-stretch gap-4 md:items-start md:flex-row">
-      <div className="flex-grow flex flex-col gap-4">
+    <main>
+      <div>
         <div className="border-solid border-gray-100">
           <Article {...article}></Article>
         </div>
         {user && (
-          <div className="space-x-2">
+          <div className="my-4 space-x-2">
             <Link href={`/home/articles/edit/${article.id}`}>
               <Button type="indigo">编辑</Button>
             </Link>
