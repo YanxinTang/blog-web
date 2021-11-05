@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@components/Button';
+import CodeMirror from '@components/CodeMirror';
 import { errorHandler, withAuthServerSideProps } from '@util';
 import { newHttp } from '@http/server';
 import clientHttp from '@http/client';
@@ -61,7 +62,7 @@ function NewArticle(props: NewArticleProps) {
   ));
 
   return (
-    <div>
+    <>
       <nav className="bg-grey-light p-3 rounded w-full">
         <ol className="list-reset flex text-grey-dark">
           <li>
@@ -75,7 +76,7 @@ function NewArticle(props: NewArticleProps) {
           <li>{article.title}</li>
         </ol>
       </nav>
-      <form className="space-y-4" onSubmit={handlePublish}>
+      <form className="flex-1 flex flex-col space-y-4" onSubmit={handlePublish}>
         <div>
           <input
             type="text"
@@ -97,23 +98,18 @@ function NewArticle(props: NewArticleProps) {
             {options}
           </select>
         </div>
-        <div>
-          <textarea
-            required
-            className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            rows={10}
-            placeholder="写点什么吧..."
-            value={content}
-            onChange={event => setContent(event.target.value)}
-          ></textarea>
-        </div>
+        <CodeMirror
+          className="flex-1 border border-gray-300 rounded"
+          value={content}
+          onChange={value => setContent(value)}
+        ></CodeMirror>
         <div className="space-y-2">
           <Button type="indigo" htmlType="submit" block>
             发布
           </Button>
         </div>
       </form>
-    </div>
+    </>
   );
 }
 

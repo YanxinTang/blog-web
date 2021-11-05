@@ -14,6 +14,18 @@
     "**/*.{css, scss, md}": "prettier --write"
   },
   "dependencies": {
+    "@codemirror/basic-setup": "^0.19.0",
+    "@codemirror/commands": "^0.19.5",
+    "@codemirror/highlight": "^0.19.6",
+    "@codemirror/lang-css": "^0.19.3",
+    "@codemirror/lang-html": "^0.19.3",
+    "@codemirror/lang-javascript": "^0.19.2",
+    "@codemirror/lang-json": "^0.19.1",
+    "@codemirror/lang-markdown": "^0.19.2",
+    "@codemirror/language": "^0.19.3",
+    "@codemirror/state": "^0.19.3",
+    "@codemirror/text": "^0.19.5",
+    "@codemirror/view": "^0.19.11",
     "@types/react-redux": "^7.1.18",
     "axios": "^0.21.1",
     "dom-align": "^1.12.2",

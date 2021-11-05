@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@components/Button';
-import Layout from 'layout/Layout';
+import CodeMirror from '@components/CodeMirror';
 import { errorHandler, withAuthServerSideProps } from '@util';
 import { http } from '@http/server';
 import clientHttp from '@http/client';
@@ -65,7 +65,7 @@ function NewArticle(props: NewArticleProps) {
   ));
 
   return (
-    <form className="space-y-4" onSubmit={handleCreateArticle}>
+    <form className="flex-1 flex flex-col space-y-4" onSubmit={handleCreateArticle}>
       <div>
         <input
           type="text"
@@ -87,16 +87,11 @@ function NewArticle(props: NewArticleProps) {
           {options}
         </select>
       </div>
-      <div>
-        <textarea
-          required
-          className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          rows={10}
-          placeholder="写点什么吧..."
-          value={content}
-          onChange={event => setContent(event.target.value)}
-        ></textarea>
-      </div>
+      <CodeMirror
+        className="flex-1 border border-gray-300 rounded"
+        value={content}
+        onChange={value => setContent(value)}
+      ></CodeMirror>
       <div>
         <Button type="indigo" htmlType="submit" className="w-3/4" block>
           发布

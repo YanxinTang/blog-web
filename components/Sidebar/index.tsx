@@ -35,7 +35,7 @@ export default function Sidebar(props: SidebarProps) {
   }, [open]);
 
   const content = (
-    <div className="w-60 bg-white dark:bg-gray-900 overflow-y-auto md:block">
+    <div className="w-60 bg-white dark:bg-gray-900 overflow-y-auto hidden md:block">
       <div className="flex items-center justify-center mt-8">
         <div className="flex items-center">
           <span className="text-gray-800 dark:text-white text-2xl font-semibold">Dashboard</span>

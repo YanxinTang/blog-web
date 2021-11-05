@@ -23,8 +23,8 @@ export default function AdminLayout(props: LayoutProps) {
           <SidebarAdmin open={sidebarOpen} onToggle={handleToggleSidebar}></SidebarAdmin>
           <div className="flex-1 flex flex-col overflow-hidden">
             <Header.Admin title={title} onToggle={handleToggleSidebar}></Header.Admin>
-            <main className="flex-1 overflow-x-hidden overflow-y-auto">
-              <div className="container mx-auto px-6 py-8">{props.children}</div>
+            <main className="flex-1 flex flex-col overflow-x-hidden overflow-y-auto container mx-auto px-6 py-8">
+              {props.children}
             </main>
           </div>
         </div>
