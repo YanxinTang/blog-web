@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -7,11 +7,13 @@ import { State } from '@store';
 import Article from '@components/Article';
 import Input from '@components/Input';
 import Button from '@components/Button';
+import Dropdown, { DropdownOption } from '@components/Dropdown';
 import { http } from '@http/server';
 import clientHttp from '@http/client';
 import { layout } from 'layout';
 import message from '@components/message';
 import { errorHandler, shouldWithAuth } from '@util';
+import More from 'assets/icons/more.svg';
 
 export const getServerSideProps: GetServerSideProps = shouldWithAuth(async ctx => {
   const { articleID } = ctx.query;
@@ -42,17 +44,40 @@ export interface ArticleProps {
 
 interface CommentProps {
   comment: Comment;
+  onDelete: (commentID: number) => void;
 }
 
 const Comment = (props: CommentProps) => {
   const { comment } = props;
+
+  const options = useMemo<DropdownOption[]>(() => {
+    return [
+      {
+        key: 'signout',
+        text: '删除',
+        onClick: () => {
+          props.onDelete(comment.id);
+        },
+      },
+    ];
+  }, []);
+
   return (
-    <div className="flex flex-col py-4">
-      <div className="flex flex-row items-baseline">
-        <strong>{comment.username}</strong>
-        <span className="ml-2 text-xs text-gray-400">{comment.createdAt}</span>
+    <div className="flex flex-col border border-gray-300 rounded bg-white">
+      <div className="flex flex-row justify-between p-2 bg-gray-100">
+        <div className="items-baseline">
+          <strong>{comment.username}</strong>
+          <span className="ml-2 text-xs text-gray-400">{comment.createdAt}</span>
+        </div>
+        <div className="menu">
+          <Dropdown options={options}>
+            <Button ghost>
+              <More></More>
+            </Button>
+          </Dropdown>
+        </div>
       </div>
-      <div>{comment.content}</div>
+      <div className="p-2">{comment.content}</div>
     </div>
   );
 };
@@ -72,8 +97,6 @@ function ArticleLayout(props: ArticleProps) {
     const username = localStorage.getItem('username') ?? '';
     setUsername(username);
   }, []);
-
-  const commentList = comments.map(c => <Comment key={c.id} comment={c} />);
 
   const handleDelete = async () => {
     try {
@@ -99,6 +122,18 @@ function ArticleLayout(props: ArticleProps) {
       message.error(errorHandler(error));
     }
   };
+
+  const handleDeleteComment = async (commentID: number) => {
+    try {
+      await clientHttp.delete(`/api/admin/articles/${article.id}/comment/${commentID}`);
+      message.success('删除成功');
+      setComments(comments => comments.filter(comment => comment.id !== commentID));
+    } catch (error) {
+      message.error(errorHandler(error));
+    }
+  };
+
+  const commentList = comments.map(c => <Comment key={c.id} comment={c} onDelete={handleDeleteComment} />);
 
   return (
     <main>
@@ -141,7 +176,7 @@ function ArticleLayout(props: ArticleProps) {
               </Button>
             </div>
           </form>
-          <div className="divide-y">{commentList}</div>
+          <div className="space-y-2 mt-4">{commentList}</div>
         </div>
       </div>
     </main>
