@@ -60,7 +60,7 @@ function Index(props: IndexProps) {
   return (
     <>
       <main className="flex flex-wrap flex-col items-stretch md:items-start md:flex-row">
-        <div className="flex-grow">
+        <div className="flex-1">
           {data.articles.length > 0 ? (
             data.articles.map(article => <Article key={article.id} {...article}></Article>)
           ) : (
