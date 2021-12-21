@@ -4,7 +4,8 @@ FROM node:alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN npm install -g pnpm \
+    && pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM node:alpine AS builder
@@ -12,7 +13,9 @@ WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 ENV HUSKY=0
-RUN pnpm build && pnpm install --prod --ignore-scripts --prefer-offline
+RUN npm install -g pnpm \
+    && pnpm build \
+    && pnpm prune --prod
 
 # Production image, copy all the files and run next
 FROM node:alpine AS runner
@@ -33,6 +36,8 @@ COPY --from=builder /app/package.json ./package.json
 USER nextjs
 
 EXPOSE 3000
+
+RUN npm install -g pnpm
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
