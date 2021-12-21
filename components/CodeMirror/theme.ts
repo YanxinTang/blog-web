@@ -15,13 +15,11 @@ export default function theme(options: Theme) {
     '&.cm-editor.cm-focused': { outline: 'none' },
     '.cm-content': { fontFamily: `'Fira Code', monospace` },
     '.cm-scroller': { height: '100%', overflow: 'auto' },
-  }
+  };
 
   if (options.height) {
     spec['&']['height'] = `${options.height}px`;
   }
 
-  return EditorView.theme(spec)
+  return EditorView.theme(spec);
 }
-
-

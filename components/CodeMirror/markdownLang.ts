@@ -8,25 +8,23 @@ const markdownLang = markdown({
       name: 'javascript',
       alias: ['js', 'jsx'],
       async load() {
-        const { javascriptLanguage } = await import(
-          '@codemirror/lang-javascript'
-        );
+        const { javascriptLanguage } = await import('@codemirror/lang-javascript');
         return new LanguageSupport(javascriptLanguage);
-      }
+      },
     }),
     LanguageDescription.of({
       name: 'css',
       async load() {
         const { cssLanguage } = await import('@codemirror/lang-css');
         return new LanguageSupport(cssLanguage);
-      }
+      },
     }),
     LanguageDescription.of({
       name: 'json',
       async load() {
         const { jsonLanguage } = await import('@codemirror/lang-json');
         return new LanguageSupport(jsonLanguage);
-      }
+      },
     }),
     LanguageDescription.of({
       name: 'html',
@@ -39,9 +37,9 @@ const markdownLang = markdown({
         const { htmlLanguage } = await import('@codemirror/lang-html');
 
         return new LanguageSupport(htmlLanguage, [css, javascript]);
-      }
-    })
-  ]
+      },
+    }),
+  ],
 });
 
 export default markdownLang;
