@@ -1,7 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './Article.module.css';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import styles from './Article.module.css';
 import { mergeClassNames } from '@util';
 
 export interface ArticleProps extends Article {}
@@ -27,7 +28,7 @@ export default function Article(props: ArticleProps) {
         </div>
       </div>
       <div className={mergeClassNames(styles.articleBody, 'markdown')}>
-        <ReactMarkdown>{props.content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{props.content}</ReactMarkdown>
       </div>
     </article>
   );
