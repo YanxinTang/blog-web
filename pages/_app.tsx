@@ -4,7 +4,6 @@ import type { AppProps } from 'next/app';
 import { useStore } from '@store';
 import { pageTitle } from '@util';
 import Head from 'next/head';
-import 'tailwindcss/tailwind.css';
 import 'assets/styles/globals.css';
 import 'assets/styles/markdown.css';
 import 'assets/styles/animation.css';
