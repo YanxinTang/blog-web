@@ -1,8 +1,6 @@
 .article {
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
-  padding: 20px 0;
-  @apply px-6 rounded-md bg-white;
 }
 
 .articleHeader {
@@ -13,10 +11,7 @@
 }
 
 .articleHeaderTitle {
-  color: #2c3e50;
-  font-size: 1.5rem;
   text-decoration: none;
-  font-weight: bold;
   border-bottom: 2px solid transparent;
 }
 
@@ -26,22 +21,16 @@
   color: #aaa;
 }
 
-.articleHeaderCategory {
-  font-size: 1rem;
-}
-
 .articleHeaderDate {
   margin-left: 1rem;
 }
 
 .articleBody {
-  color: #555;
   margin: 1rem 0;
   padding-top: 1rem;
 }
 
 .article-body,
 .article-summary {
-  color: #555;
   margin: 1rem 0;
 }

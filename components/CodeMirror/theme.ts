@@ -13,7 +13,7 @@ export default function theme(options: Theme) {
   const spec: Spec = {
     '&': { background: '#FFF' },
     '&.cm-editor.cm-focused': { outline: 'none' },
-    '.cm-content': { fontFamily: `'Fira Code', monospace` },
+    '.cm-content': { fontFamily: `'Fira Code', 'monospace', 'Noto Serif SC', serif` },
     '.cm-scroller': { height: '100%', overflow: 'auto' },
   };
 

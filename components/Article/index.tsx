@@ -13,7 +13,7 @@ export default function Article(props: ArticleProps) {
       <div className={styles.articleHeader}>
         <h1 className={styles.articleHeaderTitle}>
           <Link href={`/articles/${props.id}`} passHref>
-            <a className="text-2xl text-gray-700 font-bold hover:text-gray-600">{props.title}</a>
+            <a className="hover:text-gray-700">{props.title}</a>
           </Link>
         </h1>
         <div className={styles.articleHeaderMeta}>

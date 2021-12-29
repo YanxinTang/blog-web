@@ -30,9 +30,6 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <title>{pageTitle(process.env.NEXT_PUBLIC_SITE_NAME, meta.title)}</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet" />
       </Head>
       <Provider store={store}>{getLayout(<Component {...pageProps} />, pageProps)}</Provider>
     </>

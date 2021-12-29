@@ -9,7 +9,7 @@ export interface CategoryListProps {
 
 export default function CategoryList(props: CategoryListProps) {
   return (
-    <ul className="text-sm rounded-md bg-white -my-2">
+    <ul className="text-sm rounded-md bg-white -my-2 list-none">
       {props.categories.map(category => (
         <li key={category.id} className="cursor-pointer text-gray-700">
           <ActiveLink href={`/categories/${category.id}`} passHref>
