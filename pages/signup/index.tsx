@@ -20,8 +20,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     };
   } catch (error) {
     const { data } = await newHttp(ctx).get('/api/setting', { params: { key: 'signupEnable' } });
-    const signupEnable: boolean = data.value;
-    if (signupEnable) {
+    const signupEnable: string = data.value;
+    if (signupEnable === '1') {
       return {
         props: {
           meta: {
