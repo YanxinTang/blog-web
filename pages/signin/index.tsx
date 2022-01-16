@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 import http from '@http/client';
 import { newHttp } from '@http/server';
 import { layout } from 'layout';
-import { errorHandler } from '@util';
+import { errorHandler } from 'utils';
 import Input from '@components/Input';
 import Checkbox from '@components/Checkbox';
 import Button from '@components/Button';

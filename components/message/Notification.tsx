@@ -1,4 +1,4 @@
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';

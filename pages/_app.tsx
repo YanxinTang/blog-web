@@ -2,11 +2,12 @@ import { Provider } from 'react-redux';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { useStore } from '@store';
-import { pageTitle } from '@util';
+import { pageTitle } from 'utils';
 import Head from 'next/head';
 import 'assets/styles/globals.css';
 import 'assets/styles/markdown.css';
 import 'assets/styles/animation.css';
+import 'assets/styles/Modal.scss';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement, pageProps: any) => React.ReactNode;

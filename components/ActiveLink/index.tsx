@@ -1,7 +1,7 @@
 import React from 'react';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 
 interface ActiveLinkProps extends LinkProps {
   children: React.ReactNode | ((active: Boolean) => React.ReactNode);

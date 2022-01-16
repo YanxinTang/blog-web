@@ -5,7 +5,7 @@ import CategoryList from '@components/CategoryList';
 import { http } from '@http/server';
 import Link from 'next/link';
 import { layout } from 'layout';
-import { shouldWithAuth } from '@util';
+import { shouldWithAuth } from 'utils';
 import Image from 'next/image';
 import empty from 'assets/images/empty.png';
 

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Dropdown, { DropdownOption } from '@components/Dropdown';
 import router from 'next/router';
-import { errorHandler } from '@util';
+import { errorHandler } from 'utils';
 import message from '@components/message';
 import { useSelector } from 'react-redux';
 import { State } from '@store';

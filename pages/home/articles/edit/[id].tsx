@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from '@components/Button';
 import CodeMirror from '@components/CodeMirror';
-import { errorHandler, withAuthServerSideProps } from '@util';
+import { errorHandler, withAuthServerSideProps } from 'utils';
 import { newHttp } from '@http/server';
 import clientHttp from '@http/client';
 import message from '@components/message';

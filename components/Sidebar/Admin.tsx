@@ -31,6 +31,11 @@ export default function SidebarAdmin(props: SidebarAdminProps) {
             草稿箱
           </a>
         </ActiveLink>
+        <ActiveLink href="/home/storage" activeClassName={styles.active} passHref>
+          <a className={styles.menu} onClick={() => props.onToggle?.(false)}>
+            存储管理
+          </a>
+        </ActiveLink>
       </nav>
     </Sidebar>
   );

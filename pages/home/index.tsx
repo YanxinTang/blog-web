@@ -1,6 +1,6 @@
 import React from 'react';
 import { layout, layoutAdmin } from 'layout';
-import { withAuthServerSideProps } from '@util';
+import { withAuthServerSideProps } from 'utils';
 import { newHttp } from 'http/server';
 
 type OverviewResponse = Array<{ name: string; value: number }>;

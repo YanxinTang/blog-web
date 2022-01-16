@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { layoutAdmin } from 'layout';
-import { errorHandler, withAuthServerSideProps } from '@util';
+import { errorHandler, withAuthServerSideProps } from 'utils';
 import { http } from '@http/server';
 import clientHttp from '@http/client';
 import Button from '@components/Button';

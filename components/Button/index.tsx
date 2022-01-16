@@ -1,5 +1,5 @@
 import React from 'react';
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 import styles from './Button.module.scss';
 
 type ButtonProps = React.PropsWithChildren<{
@@ -9,6 +9,7 @@ type ButtonProps = React.PropsWithChildren<{
   block?: boolean;
   htmlType?: 'submit' | 'reset' | 'button';
   htmlForm?: string;
+  disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }>;
 
@@ -24,7 +25,14 @@ const Button = (props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) 
   );
 
   return (
-    <button ref={ref} className={newClassName} type={props.htmlType} onClick={props.onClick} form={props.htmlForm}>
+    <button
+      ref={ref}
+      className={newClassName}
+      type={props.htmlType}
+      onClick={props.onClick}
+      form={props.htmlForm}
+      disabled={props.disabled}
+    >
       {children}
     </button>
   );

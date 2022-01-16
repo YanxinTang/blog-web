@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { newHttp } from '@http/server';
-import { withAuthServerSideProps } from '@util';
+import { withAuthServerSideProps } from 'utils';
 import Button from '@components/Button';
 import Link from 'next/link';
 import message from '@components/message';
-import { errorHandler } from '@util';
+import { errorHandler } from 'utils';
 import clientHttp from '@http/client';
 import { layoutAdmin } from 'layout';
 

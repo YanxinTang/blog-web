@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Alert.module.css';
 import successIcon from './success.svg';
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 
 export type AlertProps = {
   type?: 'success' | 'info' | 'warning' | 'error';

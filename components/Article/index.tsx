@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from './Article.module.css';
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 
 export interface ArticleProps extends Article {}
 

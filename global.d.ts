@@ -30,6 +30,18 @@ interface Category extends BaseModel {
   name: string
 }
 
+interface Storage extends BaseModel {
+  name: string;
+  secretID: string;
+  secretKey: string;
+  token: string;
+  region: string;
+  endpoint: string;
+  bucket: string;
+  usage: number;
+  capacity: number;
+}
+
 interface Pagination {
   page: number;
   perpage: number;

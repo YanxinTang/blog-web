@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import clientHttp from 'http/client';
+import { errorHandler } from 'utils';
+import message from 'components/message';
+import Form, { Field } from 'components/Form';
+import Modal from 'components/Modal';
+import Button from 'components/Button';
+import Input from 'components/Input';
+
+interface AddStorageModalProps {
+  visible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  onCreate: (storage: Storage) => any;
+}
+
+export default function CreateStorageModal(props: AddStorageModalProps) {
+  const title = '创建存储';
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+  const handleFinish = async (values: any) => {
+    try {
+      setLoading(true);
+      const capacity = parseInt(values.capacity || '0');
+      const { data: storage } = await clientHttp.post<Storage>('/api/admin/storages', { ...values, capacity });
+      message.success('存储创建成功');
+      props.setVisible(false);
+      props.onCreate(storage);
+    } catch (error) {
+      message.error(errorHandler(error));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClose = () => {
+    props.setVisible(false);
+    form.resetFields();
+  };
+
+  const footer = (
+    <div className="space-x-2">
+      <Button type="blue" onClick={form.submit} disabled={loading}>
+        确定
+      </Button>
+      <Button type="blue" ghost onClick={handleClose}>
+        取消
+      </Button>
+    </div>
+  );
+
+  return (
+    <Modal title={title} visible={props.visible} footer={footer} onClose={handleClose}>
+      <Form form={form} onFinish={handleFinish}>
+        <Field name="name" rules={[{ required: true }]}>
+          <Input placeholder="名称"></Input>
+        </Field>
+        <Field name="secretID" rules={[{ required: true }]}>
+          <Input placeholder="Secret ID"></Input>
+        </Field>
+        <Field name="secretKey" rules={[{ required: true }]}>
+          <Input placeholder="Secret Key"></Input>
+        </Field>
+        <Field name="token" rules={[{ required: true }]}>
+          <Input placeholder="Token"></Input>
+        </Field>
+        <Field name="region" rules={[{ required: true }]}>
+          <Input placeholder="区域"></Input>
+        </Field>
+        <Field name="endpoint" rules={[{ required: true }]}>
+          <Input placeholder="终端"></Input>
+        </Field>
+        <Field name="bucket" rules={[{ required: true }]}>
+          <Input placeholder="桶"></Input>
+        </Field>
+        <Field name="capacity" rules={[{ required: true }]}>
+          <Input type="number" placeholder="容量"></Input>
+        </Field>
+      </Form>
+    </Modal>
+  );
+}

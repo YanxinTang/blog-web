@@ -1,7 +1,7 @@
 import React from 'react';
 import ActiveLink from '@components/ActiveLink';
 import styles from './CategoryList.module.css';
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 
 export interface CategoryListProps {
   categories: Category[];

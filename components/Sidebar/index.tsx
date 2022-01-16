@@ -1,4 +1,4 @@
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { State } from '@store';

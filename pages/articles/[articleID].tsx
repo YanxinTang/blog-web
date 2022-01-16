@@ -12,7 +12,7 @@ import { http } from '@http/server';
 import clientHttp from '@http/client';
 import { layout } from 'layout';
 import message from '@components/message';
-import { errorHandler, shouldWithAuth } from '@util';
+import { errorHandler, shouldWithAuth } from 'utils';
 import More from 'assets/icons/more.svg';
 
 export const getServerSideProps: GetServerSideProps = shouldWithAuth(async ctx => {
