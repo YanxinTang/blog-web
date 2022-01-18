@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { layoutAdmin } from 'layout';
-import { withAuthServerSideProps } from 'utils';
+import { formatBytes, withAuthServerSideProps } from 'utils';
 import { newHttp } from '@http/server';
 import Button from '@components/Button';
 import CreateModal from 'src/home/storage/CreateStorage';
@@ -35,7 +35,7 @@ const Item = (props: ItemProps) => {
       <td className="px-6 py-4 whitespace-nowrap">{storage.name}</td>
       <td className="px-6 py-4 whitespace-nowrap">{storage.region}</td>
       <td className="px-6 py-4 whitespace-nowrap">{storage.bucket}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{storage.capacity}</td>
+      <td className="px-6 py-4 whitespace-nowrap">{formatBytes(storage.capacity)}</td>
       <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
         <Button type="indigo" onClick={() => props.onChange(storage)}>
           编辑
