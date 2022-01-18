@@ -1,7 +1,10 @@
-import React from 'react';
-import { layout, layoutAdmin } from 'layout';
-import { withAuthServerSideProps } from 'utils';
+import React, { useEffect, useState } from 'react';
+import { layoutAdmin } from 'layout';
+import { errorHandler, withAuthServerSideProps } from 'utils';
 import { newHttp } from 'http/server';
+import clientHttp from 'http/client';
+import Progress from 'components/Progress';
+import message from '@components/message';
 
 type OverviewResponse = Array<{ name: string; value: number }>;
 
@@ -49,12 +52,62 @@ interface HomeProps {
   data: OverviewResponse;
 }
 
+type OverviewStorageList = Array<{
+  id: number;
+  name: string;
+  usage: number;
+  capacity: number;
+}>;
+
 function Home(props: HomeProps) {
+  const [overviewStorages, setOverviewStorages] = useState<OverviewStorageList>([]);
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      try {
+        const { data } = await clientHttp.get<OverviewStorageList>('/api/admin/overview/storage');
+        if (isMounted) {
+          setOverviewStorages(data);
+        }
+      } catch (error) {
+        if (isMounted) {
+          message.error(errorHandler(error));
+        }
+      }
+    })();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
-    <div className="grid gap-2 lg:grid-cols-3">
-      {props.data.map((pair, index) => (
-        <Card key={index} title={pair.name} value={pair.value}></Card>
-      ))}
+    <div className="space-y-8">
+      <section>
+        <h2>内容</h2>
+        <div className="grid gap-2 lg:grid-cols-3">
+          {props.data.map((pair, index) => (
+            <Card key={index} title={pair.name} value={pair.value}></Card>
+          ))}
+        </div>
+      </section>
+      <section>
+        <h2>存储</h2>
+        <div className="p-5 bg-white rounded shadow-sm space-y-4">
+          {overviewStorages.map(item => {
+            const percent = Math.floor((item.usage / item.capacity) * 100);
+            return (
+              <div className="flex items-center" key={item.id}>
+                <div className="basis-24 text-overflow-ellipsis">
+                  <strong>{item.name}</strong>
+                </div>
+                <div className="flex-grow">
+                  <Progress percent={percent}></Progress>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }

@@ -47,4 +47,8 @@ html {
   code {
     @apply text-sm;
   }
+
+  .text-overflow-ellipsis {
+    @apply overflow-x-hidden whitespace-nowrap text-ellipsis;
+  }
 }
