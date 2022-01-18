@@ -3,7 +3,9 @@ import { Field as RcField } from 'rc-field-form';
 import { FieldProps as RcFieldProps } from 'rc-field-form/lib/Field';
 import { Meta } from 'rc-field-form/lib/interface';
 
-interface FieldProps extends RcFieldProps {}
+interface FieldProps extends RcFieldProps {
+  label?: string;
+}
 
 const MetaView = (props: Meta) => {
   if (props.errors.length === 0) {
@@ -35,13 +37,25 @@ function genEmptyMeta(): Meta {
 
 export default function Field(props: FieldProps) {
   const [meta, setMeta] = React.useState<Meta>(() => genEmptyMeta());
+  const { name, label, messageVariables } = props;
+
+  let variables: Record<string, string> = {};
+  if (typeof label === 'string') {
+    variables.label = label;
+  } else if (name) {
+    variables.label = String(name);
+  }
+  if (messageVariables) {
+    variables = { ...variables, ...messageVariables };
+  }
+
   const handleMetaChange = (meta: Meta) => {
     setMeta(meta);
   };
 
   return (
     <div className={meta.errors.length ? '' : 'mb-4'}>
-      <RcField {...props} onMetaChange={handleMetaChange}></RcField>
+      <RcField {...props} messageVariables={variables} onMetaChange={handleMetaChange}></RcField>
       <MetaView {...meta}></MetaView>
     </div>
   );

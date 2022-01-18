@@ -55,28 +55,28 @@ export default function EditStorageModal(props: AddStorageModalProps) {
   return (
     <Modal title={title} visible={props.visible} footer={footer} onClose={handleClose}>
       <Form form={form} onFinish={handleFinish} initialValues={props.storage}>
-        <Field name="name" rules={[{ required: true }]}>
+        <Field name="name" label="名称" rules={[{ required: true }]}>
           <Input placeholder="名称"></Input>
         </Field>
-        <Field name="secretID" rules={[{ required: true }]}>
+        <Field name="secretID" label="Secret ID" rules={[{ required: true }]}>
           <Input placeholder="Secret ID"></Input>
         </Field>
-        <Field name="secretKey" rules={[{ required: true }]}>
+        <Field name="secretKey" label="Secret Key" rules={[{ required: true }]}>
           <Input placeholder="Secret Key"></Input>
         </Field>
-        <Field name="token" rules={[{ required: true }]}>
+        <Field name="token" label="Token" rules={[{ required: true }]}>
           <Input placeholder="Token"></Input>
         </Field>
-        <Field name="region" rules={[{ required: true }]}>
+        <Field name="region" label="区域" rules={[{ required: true }]}>
           <Input placeholder="区域"></Input>
         </Field>
-        <Field name="endpoint" rules={[{ required: true }]}>
+        <Field name="endpoint" label="终端" rules={[{ required: true }]}>
           <Input placeholder="终端"></Input>
         </Field>
-        <Field name="bucket" rules={[{ required: true }]}>
+        <Field name="bucket" label="桶" rules={[{ required: true }]}>
           <Input placeholder="桶"></Input>
         </Field>
-        <Field name="capacity" rules={[{ required: true }]}>
+        <Field name="capacity" label="容量" rules={[{ required: true }]}>
           <Input type="number" placeholder="容量"></Input>
         </Field>
       </Form>
