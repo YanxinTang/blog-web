@@ -60,7 +60,7 @@ export default function CreateStorageModal(props: AddStorageModalProps) {
         <Field name="secretKey" label="Secret Key" rules={[{ required: true }]}>
           <Input placeholder="Secret Key"></Input>
         </Field>
-        <Field name="token" label="Token" rules={[{ required: true }]}>
+        <Field name="token" label="Token">
           <Input placeholder="Token"></Input>
         </Field>
         <Field name="region" label="区域" rules={[{ required: true }]}>
