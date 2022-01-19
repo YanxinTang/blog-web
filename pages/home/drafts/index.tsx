@@ -37,7 +37,7 @@ const Item = (props: ItemProps) => {
       <td className="px-6 py-4 whitespace-nowrap">{props.title}</td>
       <td className="px-6 py-4 whitespace-nowrap">{props.category.name}</td>
       <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
-        <Link href={`/home/drafts/edit/${props.id}`}>
+        <Link href={`/home/drafts/edit/${props.id}`} passHref>
           <Button type="indigo">编辑</Button>
         </Link>
         <Button type="red" ghost onClick={() => props.onDelete(props.id)}>

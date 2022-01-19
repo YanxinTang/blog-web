@@ -1,4 +1,4 @@
-import { ValidateMessages } from "rc-field-form/es/interface";
+import { ValidateMessages } from 'rc-field-form/es/interface';
 
 export interface Locale {
   Form?: {

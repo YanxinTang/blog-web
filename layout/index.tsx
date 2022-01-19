@@ -7,16 +7,16 @@ interface PageConstructor {
   getLayout?: (page: React.ReactElement, pageProps: any) => React.ReactNode;
 }
 
-export function layout(pageCtor: PageConstructor) : React.ReactNode {
+export function layout(pageCtor: PageConstructor): React.ReactNode {
   pageCtor.getLayout = (page: React.ReactElement, pageProps: any) => {
-    return <Layout>{page}</Layout>
-  }
+    return <Layout>{page}</Layout>;
+  };
   return pageCtor;
 }
 
-export function layoutAdmin(pageCtor: PageConstructor) : React.ReactNode {
+export function layoutAdmin(pageCtor: PageConstructor): React.ReactNode {
   pageCtor.getLayout = (page: React.ReactElement, pageProps: any) => {
-    return <AdminLayout title={pageProps.meta.title}>{page}</AdminLayout>
-  }
+    return <AdminLayout title={pageProps.meta.title}>{page}</AdminLayout>;
+  };
   return pageCtor;
 }

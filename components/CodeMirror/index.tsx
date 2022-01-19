@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { basicSetup } from '@codemirror/basic-setup';
 import { EditorState } from '@codemirror/state';
 import { EditorView, ViewUpdate } from '@codemirror/view';
@@ -14,39 +14,29 @@ interface CodeMirrorProps {
 export default function CodeMirror(props: CodeMirrorProps) {
   const editorViewRef = useRef<HTMLDivElement>(null);
   const editor = useRef<EditorView>();
-  const { value } = props;
+  const { value, onChange } = props;
 
-  const onChange = () => {
+  const onEditorChange = useCallback(() => {
     return EditorView.updateListener.of((v: ViewUpdate) => {
-      /*  */
       if (v.docChanged) {
         const doc = v.state.doc;
-        props.onChange(doc.toString());
+        onChange(doc.toString());
       }
     });
-  };
+  }, [onChange]);
 
   useEffect(() => {
     const height = editorViewRef.current?.clientHeight;
 
     const state = EditorState.create({
       doc: value,
-      extensions: [basicSetup, markdownLang, onChange(), theme({ height })],
+      extensions: [basicSetup, markdownLang, onEditorChange(), theme({ height })],
     });
     editor.current = new EditorView({ state, parent: editorViewRef.current ?? undefined });
     return () => {
       editor.current?.destroy();
     };
-    // const state = EditorState.create({
-    //   doc: "a ",
-    //   extensions: [basicSetup]
-    // });
-    // const view = new EditorView({ state, parent: editorViewRef.current ?? undefined });
-    // return () => {
-    //   view.destroy();
-    //   // editor.current.removeEventListener("input", log);
-    // };
-  }, []);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     const view = editor.current;
@@ -58,7 +48,7 @@ export default function CodeMirror(props: CodeMirrorProps) {
             changes: {
               from: 0,
               to: currentValue.length,
-              insert: props.value,
+              insert: value,
             },
           })
         );

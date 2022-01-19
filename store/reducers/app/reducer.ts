@@ -1,9 +1,5 @@
 import type { Reducer } from 'redux';
-import { 
-  TOGGLE_SIDEBAR,
-  toggleSidebar,
-} from './actions';
-
+import { TOGGLE_SIDEBAR, toggleSidebar } from './actions';
 
 export interface AppState {
   isSidebarOpen: boolean;
@@ -23,6 +19,6 @@ const authReducer: Reducer<AppState> = (state = authInitState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default authReducer;

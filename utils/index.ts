@@ -3,7 +3,7 @@ import { HTMLAttributes } from 'react';
 export * from './authGuard';
 
 type ClassName = HTMLAttributes<HTMLElement>['className'];
-export function mergeClassNames(...classNames: ClassName[]) : ClassName {
+export function mergeClassNames(...classNames: ClassName[]): ClassName {
   return classNames.reduce((all, current) => {
     if (all) {
       return current ? `${all} ${current}` : all;
@@ -13,7 +13,7 @@ export function mergeClassNames(...classNames: ClassName[]) : ClassName {
 }
 
 export function isApiError(x: unknown): x is AxiosError<ResponseError> {
-  return typeof x === 'object'
+  return typeof x === 'object';
 }
 
 export function errorHandler(error: unknown): string {
@@ -23,11 +23,10 @@ export function errorHandler(error: unknown): string {
   return '请求失败，请稍候重试';
 }
 
-
-export function pageTitle(...args: (string|undefined)[]): string {
+export function pageTitle(...args: (string | undefined)[]): string {
   return args.reduce<string>((title, arg) => {
     if (title) {
-      return arg ? `${arg} - ${title}` : title
+      return arg ? `${arg} - ${title}` : title;
     }
     return arg ?? title;
   }, '');

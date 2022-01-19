@@ -15,11 +15,11 @@ const authReducer: Reducer<AuthState> = (state = authInitState, action) => {
       return { ...state, user: action.payload };
 
     case SIGNOUT:
-      return { ...state, user: null}
+      return { ...state, user: null };
 
     default:
       return state;
   }
-}
+};
 
 export default authReducer;

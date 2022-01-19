@@ -4,5 +4,5 @@ export function toggleSidebar(open: boolean | undefined): PayloadAction<boolean 
   return {
     type: TOGGLE_SIDEBAR,
     payload: open,
-  }
+  };
 }

@@ -6,6 +6,6 @@ import auth from './auth/reducer';
 const reducers = {
   auth,
   app,
-}
+};
 
-export default combineReducers(reducers)
+export default combineReducers(reducers);

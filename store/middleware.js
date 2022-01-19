@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie'
+import Cookies from 'js-cookie';
 import { SIGNIN } from './reducers/auth';
 
 export const authMiddleware = api => next => action => {
@@ -7,7 +7,7 @@ export const authMiddleware = api => next => action => {
   //   http.setHeader('Authorization', `Bearer ${action.token}`);
   // }
   if (action.type === SIGNIN) {
-    console.log(action.payload)
+    console.log(action.payload);
     Cookies.set('token', action.payload.token);
     Cookies.set('refreshToken', action.payload.refreshToken);
     // http.setHeader('Authorization', `Bearer ${action.token}`);
@@ -18,4 +18,4 @@ export const authMiddleware = api => next => action => {
   //   http.deleteHeader('Authorization');
   // }
   return next(action);
-}
+};

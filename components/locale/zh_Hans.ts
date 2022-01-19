@@ -53,6 +53,6 @@ const zh_Hans: Locale = {
       },
     },
   },
-}
+};
 
 export default zh_Hans;

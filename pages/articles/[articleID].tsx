@@ -48,7 +48,7 @@ interface CommentProps {
 }
 
 const Comment = (props: CommentProps) => {
-  const { comment } = props;
+  const { comment, onDelete } = props;
 
   const options = useMemo<DropdownOption[]>(() => {
     return [
@@ -56,11 +56,11 @@ const Comment = (props: CommentProps) => {
         key: 'signout',
         text: '删除',
         onClick: () => {
-          props.onDelete(comment.id);
+          onDelete(comment.id);
         },
       },
     ];
-  }, []);
+  }, [onDelete, comment.id]);
 
   return (
     <div className="flex flex-col border border-gray-300 rounded bg-white">
@@ -143,7 +143,7 @@ function ArticleLayout(props: ArticleProps) {
         </div>
         {user && (
           <div className="my-4 space-x-2">
-            <Link href={`/home/articles/edit/${article.id}`}>
+            <Link href={`/home/articles/edit/${article.id}`} passHref>
               <Button type="indigo">编辑</Button>
             </Link>
             <Button type="red" ghost onClick={handleDelete}>
