@@ -9,7 +9,7 @@ export interface ModalProps {
   onClose?: (e: SyntheticEvent) => any;
 }
 
-export default function AddStorageModal(props: ModalProps) {
+export default function Modal(props: ModalProps) {
   return (
     <Dialog
       title={props.title}
