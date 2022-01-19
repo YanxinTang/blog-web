@@ -6,22 +6,35 @@ import Form, { Field } from 'components/Form';
 import Modal from 'components/Modal';
 import Button from 'components/Button';
 import Input from 'components/Input';
+import InputByte, { ByteValue } from 'components/InputByte';
 
-interface AddStorageModalProps {
+interface CreateStorageModalProps {
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
   onCreate: (storage: Storage) => any;
 }
 
-export default function CreateStorageModal(props: AddStorageModalProps) {
+interface FormValues {
+  name: string;
+  secretID: string;
+  secretKey: string;
+  token: string;
+  region: string;
+  endpoint: string;
+  bucket: string;
+  byteValue: ByteValue;
+}
+
+export default function CreateStorageModal(props: CreateStorageModalProps) {
   const title = '创建存储';
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<FormValues>();
   const [loading, setLoading] = useState(false);
-  const handleFinish = async (values: any) => {
+  const handleFinish = async (values: FormValues) => {
     try {
       setLoading(true);
-      const capacity = parseInt(values.capacity || '0');
-      const { data: storage } = await clientHttp.post<Storage>('/api/admin/storages', { ...values, capacity });
+      const { byteValue, ...restValues } = values;
+      const capacity = byteValue.number * Math.pow(1024, byteValue.unit);
+      const { data: storage } = await clientHttp.post<Storage>('/api/admin/storages', { ...restValues, capacity });
       message.success('存储创建成功');
       props.setVisible(false);
       props.onCreate(storage);
@@ -50,7 +63,7 @@ export default function CreateStorageModal(props: AddStorageModalProps) {
 
   return (
     <Modal title={title} visible={props.visible} footer={footer} onClose={handleClose}>
-      <Form form={form} onFinish={handleFinish}>
+      <Form form={form} onFinish={handleFinish} onFinishFailed={e => console.log(e)}>
         <Field name="name" label="名称" rules={[{ required: true }]}>
           <Input placeholder="名称"></Input>
         </Field>
@@ -72,8 +85,8 @@ export default function CreateStorageModal(props: AddStorageModalProps) {
         <Field name="bucket" label="桶" rules={[{ required: true }]}>
           <Input placeholder="桶"></Input>
         </Field>
-        <Field name="capacity" label="容量" rules={[{ required: true }]}>
-          <Input type="number" placeholder="容量"></Input>
+        <Field name="byteValue" label="容量" rules={[{ required: true, type: 'object' }]}>
+          <InputByte placeholder="容量"></InputByte>
         </Field>
       </Form>
     </Modal>
