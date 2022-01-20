@@ -10,7 +10,7 @@ export default function SidebarAdmin(props: SidebarAdminProps) {
   return (
     <Sidebar {...props}>
       <nav className="flex flex-col mt-10 px-4 text-center space-y-2">
-        <ActiveLink href="/home" activeClassName={styles.active} passHref>
+        <ActiveLink href="/home" activeClassName={styles.active} passHref exact>
           <a className={styles.menu} onClick={() => props.onToggle?.(false)}>
             总览
           </a>
