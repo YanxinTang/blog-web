@@ -1,6 +1,10 @@
 import React, { SyntheticEvent } from 'react';
 import Dialog from 'rc-dialog';
 
+export interface ModalBaseProps {
+  visibleState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+}
+
 export interface ModalProps {
   children?: React.ReactNode;
   title?: string;

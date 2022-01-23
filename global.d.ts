@@ -1,5 +1,5 @@
 interface BaseModel {
-  id: number
+  id: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -27,7 +27,7 @@ interface Comment extends BaseModel {
 }
 
 interface Category extends BaseModel {
-  name: string
+  name: string;
 }
 
 interface Storage extends BaseModel {
@@ -50,4 +50,12 @@ interface Pagination {
 
 interface ResponseError {
   message: string;
+}
+
+interface FileObject {
+  ETag: string;
+  Key: string;
+  LastModified: string;
+  Size: number;
+  StorageClass: string;
 }

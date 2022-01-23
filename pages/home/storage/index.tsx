@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { layoutAdmin } from 'layout';
 import { formatBytes, withAuthServerSideProps } from 'utils';
 import { newHttp } from '@http/server';
@@ -32,7 +33,11 @@ const Item = (props: ItemProps) => {
 
   return (
     <tr>
-      <td className="px-6 py-4 whitespace-nowrap">{storage.name}</td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <Link href={`/home/storage/${storage.id}`} passHref>
+          {storage.name}
+        </Link>
+      </td>
       <td className="px-6 py-4 whitespace-nowrap">{storage.region}</td>
       <td className="px-6 py-4 whitespace-nowrap">{storage.bucket}</td>
       <td className="px-6 py-4 whitespace-nowrap">{formatBytes(storage.capacity)}</td>

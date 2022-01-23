@@ -4,11 +4,13 @@ import type { Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './reducers';
 import type { AppState } from './reducers/app';
-import type { AuthState } from './reducers/auth';
+import type { UploadState } from './reducers/upload';
+import { AuthState } from '@reducers/auth';
 
 export type State = {
   app: AppState;
   auth: AuthState;
+  upload: UploadState;
 };
 let store: Store<State> | undefined;
 

@@ -1,25 +1,18 @@
 .progress-outer {
-  @apply
-    px-4
-    py-2
-  ;
+  @apply py-2;
 
   .progress-inner {
-    @apply
-      rounded
-      bg-gray-200
-    ;
+    @apply rounded
+      bg-gray-200;
 
     .progress-bg {
-      @apply
-        h-4
+      @apply h-4
         leading-4
         rounded-l
         bg-indigo-700
         text-white
         text-sm
-        text-center
-      ;
+        text-center;
     }
   }
 }
