@@ -1,0 +1,16 @@
+.circle {
+  position: relative;
+
+  .progress__circle {
+    min-width: 1em;
+    min-height: 1em;
+  }
+
+  .progress__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+  }
+}

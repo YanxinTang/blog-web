@@ -1,11 +1,10 @@
 import React from 'react';
-import Line from './Line';
+import Line, { LineProps } from './Line';
+import Circle, { CircleProps } from './Circle';
+import { omit } from 'utils';
 
-export interface ProgressProps {
-  type?: 'line';
-  percent: number;
-  strokeColor?: string;
-  trailColor?: string;
+export interface ProgressProps extends LineProps, CircleProps {
+  type?: 'line' | 'circle';
 }
 
 export default function Progress(props: ProgressProps) {
@@ -13,7 +12,9 @@ export default function Progress(props: ProgressProps) {
 
   let child;
   if (type === 'line') {
-    child = <Line {...restProps}></Line>;
+    child = <Line {...omit(restProps, ['size'])}></Line>;
+  } else if (type === 'circle') {
+    child = <Circle {...restProps}></Circle>;
   }
 
   return <div className="progress">{child}</div>;
