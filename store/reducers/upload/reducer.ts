@@ -1,27 +1,28 @@
 import type { Reducer } from 'redux';
-import { ADD_TASKS } from '.';
-import { DELETE_TASK, TOGGLE, UploadPanelState, UploadTask } from './actions';
+import { TaskID, UploadTask } from './interface';
+import { ADD_TASK, UPDATE_TASK, DELETE_TASK, updateTask } from './actions';
+import { addTask, deleteTask } from './actions';
 
 export interface UploadState {
-  state: UploadPanelState;
-  tasks: UploadTask[];
+  taskIDs: TaskID[];
+  taskMap: Record<TaskID, UploadTask>;
 }
 
 const uploadInitState: UploadState = {
-  state: UploadPanelState.collapse,
-  tasks: [],
+  taskIDs: [],
+  taskMap: {},
 };
 
 const authReducer: Reducer<UploadState> = (state = uploadInitState, action) => {
   switch (action.type) {
-    case TOGGLE:
-      return { ...state, state: action.payload };
+    case ADD_TASK:
+      return addStateTask(state, action.payload);
 
-    case ADD_TASKS:
-      return { ...state, tasks: [...state.tasks, ...action.payload] };
+    case UPDATE_TASK:
+      return updateStateTask(state, action.payload);
 
     case DELETE_TASK:
-      return { ...state, tasks: state.tasks.filter(task => task.id !== action.payload) };
+      return deleteStateTask(state, action.payload);
 
     default:
       return state;
@@ -29,3 +30,31 @@ const authReducer: Reducer<UploadState> = (state = uploadInitState, action) => {
 };
 
 export default authReducer;
+
+type PayloadType<T extends (...args: any) => any> = ReturnType<T>['payload'];
+
+function addStateTask(state: UploadState, payload: PayloadType<typeof addTask>): UploadState {
+  const { taskIDs, taskMap: taskMap } = state;
+  const task = payload;
+  taskIDs.push(task.id);
+  taskMap[task.id] = task;
+  return { ...state, taskIDs, taskMap };
+}
+
+function updateStateTask(state: UploadState, payload: PayloadType<typeof updateTask>): UploadState {
+  const { taskMap: _taskMap } = state;
+  const { id } = payload;
+  const _task = _taskMap[id];
+  const taskMap = { ..._taskMap, [id]: { ..._task, ...payload } };
+  console.log('update task: ', payload);
+  return { ...state, taskMap };
+}
+
+function deleteStateTask(state: UploadState, payload: PayloadType<typeof deleteTask>): UploadState {
+  const { taskIDs: _taskIDs, taskMap: _taskMap } = state;
+  const taskID = payload;
+  const taskIDs = _taskIDs.filter(id => id !== taskID);
+  const taskMap = { ..._taskMap };
+  delete taskMap[taskID];
+  return { ...state, taskIDs, taskMap };
+}

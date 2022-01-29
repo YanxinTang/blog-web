@@ -76,7 +76,6 @@ function Storages(props: CategoriesProps) {
 
   const handleEditStorage = (storage: Storage) => {
     setStorages(storages => {
-      console.log(storages);
       const copied = [...storages];
       const idx = copied.findIndex(item => item.id === storage.id);
       copied[idx] = storage;

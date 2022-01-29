@@ -1,8 +1,6 @@
 import { mergeClassNames } from 'utils';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { State } from '@store';
-import { useSelector } from 'react-redux';
 
 export interface SidebarProps {
   open: boolean;
@@ -35,7 +33,7 @@ export default function Sidebar(props: SidebarProps) {
   }, [open]);
 
   const content = (
-    <div className="w-60 bg-white dark:bg-gray-900 overflow-y-auto hidden md:block">
+    <div className="w-60 flex-none bg-white overflow-y-auto sticky h-screen top-0 z-40">
       <div className="flex items-center justify-center mt-8">
         <div className="flex items-center">
           <span className="text-gray-800 dark:text-white text-2xl font-semibold">Dashboard</span>
@@ -46,7 +44,7 @@ export default function Sidebar(props: SidebarProps) {
   );
 
   const portalContent = (
-    <div className="">
+    <div>
       <div
         className={mergeClassNames('mask fixed inset-0 z-40 bg-gray-100 bg-opacity-50', open ? 'block' : 'hidden')}
         onClick={() => props.onToggle?.(false)}

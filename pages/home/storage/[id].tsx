@@ -6,7 +6,7 @@ import Button from 'components/Button';
 import DeleteFile from 'src/home/storage/DeleteFile';
 import UploadButton from 'components/UploadButton';
 import { useDispatch } from 'react-redux';
-import { addTasks, toggle, UploadPanelState } from '@reducers/upload';
+import { uploadFile } from '@reducers/upload';
 
 interface GetStorageObjectsResponse {
   CommonPrefixes: string | null;
@@ -87,9 +87,9 @@ const StorageList = (props: StorageListProps) => {
   const [deleteFile, setDeleteFile] = useState<FileObject | null>(null);
 
   const handleFiles = (files: File[]) => {
-    const tasks = files.map(file => ({ storageID, file, progress: 0 }));
-    dispatch(addTasks(tasks));
-    dispatch(toggle(UploadPanelState.visible));
+    for (let file of files) {
+      dispatch(uploadFile(storageID, file));
+    }
   };
 
   const handleDelete = (file: FileObject) => {

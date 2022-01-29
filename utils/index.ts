@@ -44,3 +44,15 @@ export function formatBytes(bytes: number, decimals: number = 2): string {
 
   return `${(bytes / Math.pow(1024, i)).toFixed(dm)} ${sizes[i]}`;
 }
+
+export function omit<T extends object, K extends keyof T>(obj: T, fields: K[]): Omit<T, K> {
+  const clone = { ...obj };
+
+  if (Array.isArray(fields)) {
+    fields.forEach(key => {
+      delete clone[key];
+    });
+  }
+
+  return clone;
+}
