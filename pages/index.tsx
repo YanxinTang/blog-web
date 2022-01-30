@@ -64,13 +64,15 @@ function Index(props: IndexProps) {
           {data.articles.length > 0 ? (
             data.articles.map(article => <Article key={article.id} {...article}></Article>)
           ) : (
-            <Image src={empty} alt="空空如也"></Image>
+            <Image src={empty} alt="空空如也" layout="responsive"></Image>
           )}
           <Pagination pagination={data.pagination} itemRender={paginationItemRender}></Pagination>
         </div>
-        <div className="flex-grow-0 my-4 md:my-0 md:ml-4 md:w-60">
-          <CategoryList categories={props.data.categories} />
-        </div>
+        {data.categories.length <= 0 ? null : (
+          <div className="flex-grow-0 my-4 md:my-0 md:ml-4 md:w-60">
+            <CategoryList categories={props.data.categories} />
+          </div>
+        )}
       </main>
     </>
   );
