@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import http from '@http/client';
-import { newHttp } from '@http/server';
+import http from 'http/client';
+import { newHttp } from 'http/server';
 import { errorHandler } from 'utils';
 import { layout } from 'layout';
-import message from '@components/message';
-import Input from '@components/Input';
-import Button from '@components/Button';
+import message from 'components/message';
+import Input from 'components/Input';
+import Button from 'components/Button';
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   try {

@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next';
-import Pagination, { ItemRender } from '@components/Pagination';
-import Article from '@components/Article';
-import CategoryList from '@components/CategoryList';
-import { http } from '@http/server';
+import Pagination, { ItemRender } from 'components/Pagination';
+import Article from 'components/Article';
+import CategoryList from 'components/CategoryList';
+import { http } from 'http/server';
 import Link from 'next/link';
 import { layout } from 'layout';
 import { shouldWithAuth } from 'utils';

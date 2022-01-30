@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Button from '@components/Button';
-import CodeMirror from '@components/CodeMirror';
+import Button from 'components/Button';
+import CodeMirror from 'components/CodeMirror';
 import { errorHandler, withAuthServerSideProps } from 'utils';
-import { newHttp } from '@http/server';
-import clientHttp from '@http/client';
-import message from '@components/message';
+import { newHttp } from 'http/server';
+import clientHttp from 'http/client';
+import message from 'components/message';
 import { useRouter } from 'next/router';
 import { layoutAdmin } from 'layout';
 

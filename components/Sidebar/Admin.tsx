@@ -1,5 +1,5 @@
 import React from 'react';
-import ActiveLink from '@components/ActiveLink';
+import ActiveLink from 'components/ActiveLink';
 import Sidebar from './index';
 import type { SidebarProps } from './index';
 import styles from './Admin.module.css';

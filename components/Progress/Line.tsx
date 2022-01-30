@@ -1,4 +1,4 @@
-import { mergeClassNames } from '@util';
+import { mergeClassNames } from 'utils';
 import React from 'react';
 import styles from './Line.module.scss';
 

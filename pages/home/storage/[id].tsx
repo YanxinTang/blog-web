@@ -7,7 +7,7 @@ import DeleteFile from 'src/home/storage/DeleteFile';
 import UploadButton from 'components/UploadButton';
 import { useDispatch } from 'react-redux';
 import { uploadFile } from '@reducers/upload';
-import message from '@components/message';
+import message from 'components/message';
 
 interface GetStorageObjectsResponse {
   CommonPrefixes: string | null;

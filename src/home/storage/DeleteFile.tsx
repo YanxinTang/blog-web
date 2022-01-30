@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import clientHttp from 'http/client';
 import Modal, { ModalBaseProps } from 'components/Modal';
-import Button from '@components/Button';
-import { errorHandler } from '@util';
-import message from '@components/message';
+import Button from 'components/Button';
+import { errorHandler } from 'utils';
+import message from 'components/message';
 
 interface DeleteFileProps extends ModalBaseProps {
   storageID: number;

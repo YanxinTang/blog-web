@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-import { useStore } from '@store';
+import { useStore } from 'store';
 import { pageTitle } from 'utils';
 import Head from 'next/head';
 import ConfigProvider from 'components/ConfigProvider';

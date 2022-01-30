@@ -2,16 +2,16 @@ import React, { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import router from 'next/router';
 import Image from 'next/image';
-import Dropdown, { DropdownOption } from '@components/Dropdown';
-import clientHttp from '@http/client';
-import message from '@components/message';
+import Dropdown, { DropdownOption } from 'components/Dropdown';
+import clientHttp from 'http/client';
+import message from 'components/message';
 import { errorHandler, mergeClassNames } from 'utils';
 import FilterLeft from 'assets/icons/filter-left.svg';
 import DarkMode from 'assets/icons/dark-mode.svg';
 import avatar from 'assets/images/avatar.png';
 import Link from 'next/link';
 import Progress from 'components/Progress';
-import { State } from '@store';
+import { State } from 'store';
 import { TaskID, UploadTask } from '@reducers/upload/interface';
 
 const UploadButton = () => {

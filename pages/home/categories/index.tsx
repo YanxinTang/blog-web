@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { layoutAdmin } from 'layout';
 import { errorHandler, withAuthServerSideProps } from 'utils';
-import { http } from '@http/server';
-import clientHttp from '@http/client';
-import Button from '@components/Button';
-import Input from '@components/Input';
-import message from '@components/message';
+import { http } from 'http/server';
+import clientHttp from 'http/client';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import message from 'components/message';
 
 type CategoriesResponse = Category[];
 

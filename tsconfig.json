@@ -15,11 +15,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@util": ["utils"],
-      "@store": ["store"],
       "@reducers/*": ["store/reducers/*"],
-      "@http/*": ["http/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

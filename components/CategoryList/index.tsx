@@ -1,5 +1,5 @@
 import React from 'react';
-import ActiveLink from '@components/ActiveLink';
+import ActiveLink from 'components/ActiveLink';
 import styles from './CategoryList.module.css';
 import { mergeClassNames } from 'utils';
 

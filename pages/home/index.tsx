@@ -4,7 +4,7 @@ import { errorHandler, withAuthServerSideProps } from 'utils';
 import { newHttp } from 'http/server';
 import clientHttp from 'http/client';
 import Progress from 'components/Progress';
-import message from '@components/message';
+import message from 'components/message';
 
 type OverviewResponse = Array<{ name: string; value: number }>;
 

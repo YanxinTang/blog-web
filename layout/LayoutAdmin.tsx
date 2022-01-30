@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import SidebarAdmin from '@components/Sidebar/Admin';
-import Header from '@components/Header';
+import SidebarAdmin from 'components/Sidebar/Admin';
+import Header from 'components/Header';
 import { mergeClassNames } from 'utils';
 import styles from './styles.module.scss';
 
