@@ -7,6 +7,7 @@ import DeleteFile from 'src/home/storage/DeleteFile';
 import UploadButton from 'components/UploadButton';
 import { useDispatch } from 'react-redux';
 import { uploadFile } from '@reducers/upload';
+import message from '@components/message';
 
 interface GetStorageObjectsResponse {
   CommonPrefixes: string | null;
@@ -49,6 +50,7 @@ export const getServerSideProps = withAuthServerSideProps(async ctx => {
 
 interface ItemProps {
   file: FileObject;
+  onCopy: (file: FileObject) => void;
   onDelete: (file: FileObject) => void;
 }
 
@@ -61,7 +63,10 @@ const Item = (props: ItemProps) => {
         {file.Key}
       </td>
       <td className="px-6 py-4 whitespace-nowrap">{formatBytes(file.Size)}</td>
-      <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
+      <td className="px-6 py-4 space-x-2">
+        <Button type="indigo" ghost onClick={() => props.onCopy(file)}>
+          复制链接
+        </Button>
         <Button type="red" ghost onClick={() => props.onDelete(file)}>
           删除
         </Button>
@@ -97,6 +102,15 @@ const StorageList = (props: StorageListProps) => {
     setDeleteFileModalVisible(true);
   };
 
+  const handleCopyFileLink = async (file: FileObject) => {
+    try {
+      await navigator.clipboard.writeText(`${window.location.origin}/api/storages/${storageID}/${file.Key}`);
+      message.success('复制成功');
+    } catch {
+      message.error('复制失败');
+    }
+  };
+
   const handleDeleteFile = (file: FileObject) => {
     setFiles(files => files.filter(item => item.Key !== file.Key));
   };
@@ -119,14 +133,19 @@ const StorageList = (props: StorageListProps) => {
                     <th scope="col" className="w-32 px-6 py-4 tracking-wider">
                       大小
                     </th>
-                    <th scope="col" className="w-32 px-6 py-4 tracking-wider">
+                    <th scope="col" className="w-64 px-6 py-4 tracking-wider">
                       操作
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {files.map(file => (
-                    <Item key={file.ETag} file={file} onDelete={() => handleDelete(file)}></Item>
+                    <Item
+                      key={file.ETag}
+                      file={file}
+                      onCopy={handleCopyFileLink}
+                      onDelete={() => handleDelete(file)}
+                    ></Item>
                   ))}
                 </tbody>
               </table>
