@@ -20,7 +20,7 @@ export function withAuthServerSideProps(
     try {
       const response = await newHttp(ctx).get<User>('/api/login/session', {
         headers: {
-          Cookie: ctx.req.headers.cookie,
+          Cookie: ctx.req.headers.cookie ?? false,
         },
       });
       user = response.data;
@@ -69,7 +69,7 @@ export function shouldWithAuth(incomingGSSP?: IncomingGSSP<WithAuthServerSidePro
     const authRequest = newHttp(ctx)
       .get<User>('/api/login/session', {
         headers: {
-          Cookie: ctx.req.headers.cookie,
+          Cookie: ctx.req.headers.cookie ?? false,
         },
         // shouldWithAuth 不强制要求登录，因此这里提前捕获因为验证登录而产生的错误，使其不要被继续抛出
         // 并且直接返回 null, 使得未登录的情况下，user 的值设为 null

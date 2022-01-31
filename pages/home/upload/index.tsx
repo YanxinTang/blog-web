@@ -21,7 +21,7 @@ interface UploadPageProps {}
 
 const UploadPage = (props: UploadPageProps) => {
   const taskIDs = useSelector<State, TaskID[]>(state => state.upload.taskIDs);
-  const taskMap = useSelector<State, { [key: TaskID]: UploadTask }>(state => state.upload.taskMap);
+  const taskMap = useSelector<State, Record<TaskID, UploadTask>>(state => state.upload.taskMap);
   const dispatch = useDispatch();
 
   const handleDeleteUploadTask = (taskID: TaskID) => {
