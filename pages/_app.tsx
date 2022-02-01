@@ -9,6 +9,7 @@ import 'assets/styles/globals.css';
 import 'assets/styles/markdown.css';
 import 'assets/styles/animation.css';
 import 'assets/styles/Modal.scss';
+import 'components/Icon/import';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement, pageProps: any) => React.ReactNode;

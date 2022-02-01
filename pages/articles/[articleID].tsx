@@ -13,7 +13,7 @@ import clientHttp from 'http/client';
 import { layout } from 'layout';
 import message from 'components/message';
 import { errorHandler, shouldWithAuth } from 'utils';
-import More from 'assets/icons/more.svg';
+import I from 'components/Icon';
 
 export const getServerSideProps: GetServerSideProps = shouldWithAuth(async ctx => {
   const { articleID } = ctx.query;
@@ -72,7 +72,7 @@ const Comment = (props: CommentProps) => {
         <div className="menu">
           <Dropdown options={options}>
             <Button ghost>
-              <More></More>
+              <I id="three-dots"></I>
             </Button>
           </Dropdown>
         </div>

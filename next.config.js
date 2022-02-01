@@ -1,4 +1,5 @@
-const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const base = {
   reactStrictMode: true,
@@ -8,15 +9,11 @@ const base = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: [
-        '@svgr/webpack',
-        'svg-transform-loader',
-        'svgo-loader'
-      ],
+      use: ['svg-sprite-loader', 'svg-transform-loader', 'svgo-loader'],
     });
     return config;
   },
-}
+};
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
@@ -26,14 +23,14 @@ module.exports = (phase, { defaultConfig }) => {
         return [
           {
             source: '/api/:path*',
-            destination: 'http://localhost:8000/api/:path*' // Proxy to Backend
-          }
-        ]
-      }
-    }
+            destination: 'http://localhost:8000/api/:path*', // Proxy to Backend
+          },
+        ];
+      },
+    };
   }
 
   return {
     ...base,
-  }
-}
+  };
+};

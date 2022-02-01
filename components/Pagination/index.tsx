@@ -1,7 +1,6 @@
 import React from 'react';
 import Pager from './Pager';
-import ChevronLeft from 'assets/icons/chevron-left.svg';
-import ChevronRight from 'assets/icons/chevron-right.svg';
+import I from 'components/Icon';
 
 export type ItemRender = (page: number, element: React.ReactElement) => React.ReactElement;
 
@@ -15,7 +14,7 @@ interface PaginationProps {
 const prevElement = (
   <a className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
     <span className="sr-only">Previous</span>
-    <ChevronLeft />
+    <I id="chevron-left"></I>
   </a>
 );
 
@@ -25,7 +24,7 @@ const nextElement = (
     className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
   >
     <span className="sr-only">Next</span>
-    <ChevronRight />
+    <I id="chevron-right"></I>
   </a>
 );
 

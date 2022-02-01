@@ -1,9 +1,5 @@
 .header {
   @apply flex border-b border-gray-200 bg-white px-6;
-  height: 80px;
-  /* border-bottom: 1px solid #e5e5e5; */
-}
 
-.brand {
-  
+  height: 80px;
 }

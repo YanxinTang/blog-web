@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import router from 'next/router';
 import Image from 'next/image';
@@ -6,8 +6,7 @@ import Dropdown, { DropdownOption } from 'components/Dropdown';
 import clientHttp from 'http/client';
 import message from 'components/message';
 import { errorHandler, mergeClassNames } from 'utils';
-import FilterLeft from 'assets/icons/filter-left.svg';
-import DarkMode from 'assets/icons/dark-mode.svg';
+import I from 'components/Icon';
 import avatar from 'assets/images/avatar.png';
 import Link from 'next/link';
 import Progress from 'components/Progress';
@@ -29,11 +28,15 @@ const UploadButton = () => {
     return Math.floor((loaded / total) * 100) || 0;
   }, [taskIDs, taskMap]);
 
-  let child = <span>U</span>;
+  let child = (
+    <span className="text-sm">
+      <I id="arrow-up-circle"></I>
+    </span>
+  );
   if (activeTaskIDs.length > 0) {
     child = (
       <Progress type="circle" percent={percent} size="1em" strokeWidth={16}>
-        <span className="text-sm"> {activeTaskIDs.length ? activeTaskIDs.length : 'U'}</span>
+        <span className="text-sm">{activeTaskIDs.length}</span>
       </Progress>
     );
   }
@@ -85,7 +88,7 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
           className="text-2xl text-gray-500 dark:text-gray-300 focus:outline-none lg:hidden"
           onClick={() => props.onToggle?.(true)}
         >
-          <FilterLeft />
+          <I id="list"></I>
         </button>
         <div>
           <h1 className="text-2xl font-medium text-gray-800 dark:text-white">{props.title}</h1>
@@ -95,7 +98,7 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
       <div className="flex items-center space-x-4">
         <UploadButton></UploadButton>
         <button className="flex text-2xl text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Color Mode">
-          <DarkMode />
+          <I id="sun-fill"></I>
         </button>
         {user && (
           <div className="relative">
