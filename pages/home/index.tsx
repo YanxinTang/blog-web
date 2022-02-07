@@ -3,8 +3,8 @@ import { layoutAdmin } from 'layout';
 import { errorHandler, withAuthServerSideProps } from 'utils';
 import { newHttp } from 'http/server';
 import clientHttp from 'http/client';
-import Progress from 'components/Progress';
-import message from 'components/message';
+import Progress from 'components/base/Progress';
+import message from 'components/base/message';
 
 type OverviewResponse = Array<{ name: string; value: number }>;
 

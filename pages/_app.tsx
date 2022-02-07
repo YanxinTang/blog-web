@@ -4,12 +4,12 @@ import type { AppProps } from 'next/app';
 import { useStore } from 'store';
 import { pageTitle } from 'utils';
 import Head from 'next/head';
-import ConfigProvider from 'components/ConfigProvider';
+import ConfigProvider from 'components/base/ConfigProvider';
 import 'assets/styles/globals.css';
 import 'assets/styles/markdown.css';
 import 'assets/styles/animation.css';
 import 'assets/styles/Modal.scss';
-import 'components/Icon/import';
+import 'components/base/Icon/import';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: React.ReactElement, pageProps: any) => React.ReactNode;

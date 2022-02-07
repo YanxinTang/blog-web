@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { layoutAdmin } from 'layout';
 import { formatBytes, withAuthServerSideProps } from 'utils';
 import { newHttp } from 'http/server';
-import Button from 'components/Button';
-import DeleteFile from 'src/home/storage/DeleteFile';
-import UploadButton from 'components/UploadButton';
+import Button from 'components/base/Button';
+import DeleteFile from 'components/page/home/storage/DeleteFile';
+import UploadButton from 'components/base/UploadButton';
 import { useDispatch } from 'react-redux';
 import { uploadFile } from '@reducers/upload';
-import message from 'components/message';
+import message from 'components/base/message';
 
 interface GetStorageObjectsResponse {
   CommonPrefixes: string | null;

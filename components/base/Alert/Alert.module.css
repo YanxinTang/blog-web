@@ -10,7 +10,6 @@
   @apply text-green-800;
 }
 
-
 .info {
   @apply bg-blue-200;
 }
@@ -18,7 +17,6 @@
 .success .alertText {
   @apply text-blue-800;
 }
-
 
 .warning {
   @apply bg-yellow-200;

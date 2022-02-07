@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { layoutAdmin } from 'layout';
 import { formatBytes, withAuthServerSideProps } from 'utils';
 import { newHttp } from 'http/server';
-import Button from 'components/Button';
-import CreateModal from 'src/home/storage/CreateStorage';
-import EditModal from 'src/home/storage/EditStorage';
-import DeleteModal from 'src/home/storage/DeleteStorage';
+import Button from 'components/base/Button';
+import CreateModal from 'components/page/home/storage/CreateStorage';
+import EditModal from 'components/page/home/storage/EditStorage';
+import DeleteModal from 'components/page/home/storage/DeleteStorage';
 
 type GetStoragesResponse = Storage[];
 

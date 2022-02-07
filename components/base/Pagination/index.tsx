@@ -1,6 +1,6 @@
 import React from 'react';
 import Pager from './Pager';
-import I from 'components/Icon';
+import I from 'components/base/Icon';
 
 export type ItemRender = (page: number, element: React.ReactElement) => React.ReactElement;
 

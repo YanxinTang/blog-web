@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next';
-import Pagination, { ItemRender } from 'components/Pagination';
-import Article from 'components/Article';
-import CategoryList from 'components/CategoryList';
+import Pagination, { ItemRender } from 'components/base/Pagination';
+import Article from 'components/base/Article';
+import CategoryList from 'components/base/CategoryList';
 import { http } from 'http/server';
 import Link from 'next/link';
 import { layout } from 'layout';

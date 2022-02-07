@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Dropdown, { DropdownOption } from 'components/Dropdown';
+import Dropdown, { DropdownOption } from 'components/base/Dropdown';
 import router from 'next/router';
 import { errorHandler } from 'utils';
-import message from 'components/message';
+import message from 'components/base/message';
 import { useSelector } from 'react-redux';
 import { State } from 'store';
 import clientHttp from 'http/client';

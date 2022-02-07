@@ -4,18 +4,18 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { State } from 'store';
-import Article from 'components/Article';
-import Input from 'components/Input';
-import Button from 'components/Button';
-import Dropdown, { DropdownOption } from 'components/Dropdown';
+import Article from 'components/base/Article';
+import Input from 'components/base/Input';
+import Button from 'components/base/Button';
+import Dropdown, { DropdownOption } from 'components/base/Dropdown';
 import { http } from 'http/server';
 import clientHttp from 'http/client';
 import { layout } from 'layout';
-import message from 'components/message';
+import message from 'components/base/message';
 import { errorHandler, shouldWithAuth } from 'utils';
-import I from 'components/Icon';
-import Form, { Field } from 'components/Form';
-import { InputCaptchaValue } from 'components/InputCaptcha';
+import I from 'components/base/Icon';
+import Form, { Field } from 'components/base/Form';
+import { InputCaptchaValue } from 'components/base/InputCaptcha';
 
 export const getServerSideProps: GetServerSideProps = shouldWithAuth(async ctx => {
   const { articleID } = ctx.query;

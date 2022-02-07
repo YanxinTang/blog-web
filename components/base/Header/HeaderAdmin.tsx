@@ -2,14 +2,14 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import router from 'next/router';
 import Image from 'next/image';
-import Dropdown, { DropdownOption } from 'components/Dropdown';
+import Dropdown, { DropdownOption } from 'components/base/Dropdown';
 import clientHttp from 'http/client';
-import message from 'components/message';
+import message from 'components/base/message';
 import { errorHandler, mergeClassNames } from 'utils';
-import I from 'components/Icon';
+import I from 'components/base/Icon';
 import avatar from 'assets/images/avatar.png';
 import Link from 'next/link';
-import Progress from 'components/Progress';
+import Progress from 'components/base/Progress';
 import { State } from 'store';
 import { TaskID, UploadTask } from '@reducers/upload/interface';
 

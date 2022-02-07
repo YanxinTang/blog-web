@@ -5,10 +5,10 @@ import http from 'http/client';
 import { newHttp } from 'http/server';
 import { layout } from 'layout';
 import { errorHandler } from 'utils';
-import Input from 'components/Input';
-import Checkbox from 'components/Checkbox';
-import Button from 'components/Button';
-import message from 'components/message';
+import Input from 'components/base/Input';
+import Checkbox from 'components/base/Checkbox';
+import Button from 'components/base/Button';
+import message from 'components/base/message';
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   try {

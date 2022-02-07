@@ -5,9 +5,9 @@ import http from 'http/client';
 import { newHttp } from 'http/server';
 import { errorHandler } from 'utils';
 import { layout } from 'layout';
-import message from 'components/message';
-import Input from 'components/Input';
-import Button from 'components/Button';
+import message from 'components/base/message';
+import Input from 'components/base/Input';
+import Button from 'components/base/Button';
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   try {

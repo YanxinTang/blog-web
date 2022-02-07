@@ -3,9 +3,9 @@ import { layoutAdmin } from 'layout';
 import { errorHandler, withAuthServerSideProps } from 'utils';
 import { http } from 'http/server';
 import clientHttp from 'http/client';
-import Button from 'components/Button';
-import Input from 'components/Input';
-import message from 'components/message';
+import Button from 'components/base/Button';
+import Input from 'components/base/Input';
+import message from 'components/base/message';
 
 type CategoriesResponse = Category[];
 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Button from 'components/Button';
-import CodeMirror from 'components/CodeMirror';
+import Button from 'components/base/Button';
+import CodeMirror from 'components/base/CodeMirror';
 import { errorHandler, withAuthServerSideProps } from 'utils';
 import { http } from 'http/server';
 import clientHttp from 'http/client';
-import message from 'components/message';
+import message from 'components/base/message';
 import { layoutAdmin } from 'layout';
 
 type CategoriesResponse = Category[];

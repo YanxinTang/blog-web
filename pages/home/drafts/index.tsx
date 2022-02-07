@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { newHttp } from 'http/server';
 import { withAuthServerSideProps } from 'utils';
-import Button from 'components/Button';
+import Button from 'components/base/Button';
 import Link from 'next/link';
-import message from 'components/message';
+import message from 'components/base/message';
 import { errorHandler } from 'utils';
 import clientHttp from 'http/client';
 import { layoutAdmin } from 'layout';

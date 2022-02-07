@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import Button from 'components/Button';
+import Button from 'components/base/Button';
 
 export interface UploadButton {
   children?: React.ReactNode;

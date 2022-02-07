@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import clientHttp from 'http/client';
 import { errorHandler } from 'utils';
-import message from 'components/message';
-import Modal from 'components/Modal';
-import Button from 'components/Button';
+import message from 'components/base/message';
+import Modal from 'components/base/Modal';
+import Button from 'components/base/Button';
 
 interface AddStorageModalProps {
   storage: Storage;

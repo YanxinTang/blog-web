@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Input from 'components/Input';
+import Input from 'components/base/Input';
 import { getCaptcha, GetCaptchaResponse } from 'api';
 import clientHttp from 'http/client';
-import message from 'components/message';
+import message from 'components/base/message';
 import { errorHandler } from 'utils';
 
 export interface InputCaptchaValue {

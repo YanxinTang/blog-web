@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from 'components/Button';
-import Progress from 'components/Progress';
+import Button from 'components/base/Button';
+import Progress from 'components/base/Progress';
 import { formatBytes } from 'utils';
 import { TaskID, UploadTask } from '@reducers/upload/interface';
 

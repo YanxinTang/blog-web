@@ -3,7 +3,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
 const base = {
   reactStrictMode: true,
   eslint: {
-    dirs: ['pages', 'components', 'http', 'layout', 'store', 'src', 'utils', 'test'],
+    dirs: ['pages', 'components', 'http', 'layout', 'store', 'utils', 'test'],
   },
   webpack(config) {
     config.module.rules.push({

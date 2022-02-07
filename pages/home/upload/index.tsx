@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { State } from 'store';
 import { deleteTask } from '@reducers/upload';
 import { layoutAdmin } from 'layout';
-import UploadFileTask from 'src/home/upload/UploadFileTask';
+import UploadFileTask from 'components/page/home/upload/UploadFileTask';
 import { withAuthServerSideProps } from 'utils/authGuard';
 import { TaskID, UploadTask } from '@reducers/upload/interface';
 
