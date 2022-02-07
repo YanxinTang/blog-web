@@ -56,3 +56,7 @@ export function omit<T extends object, K extends keyof T>(obj: T, fields: K[]): 
 
   return clone;
 }
+
+export function isServerSide(): boolean {
+  return typeof window === 'undefined';
+}

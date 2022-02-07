@@ -1,5 +1,4 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const base = {
   reactStrictMode: true,

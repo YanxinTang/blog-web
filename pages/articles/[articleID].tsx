@@ -14,6 +14,8 @@ import { layout } from 'layout';
 import message from 'components/message';
 import { errorHandler, shouldWithAuth } from 'utils';
 import I from 'components/Icon';
+import Form, { Field } from 'components/Form';
+import { InputCaptchaValue } from 'components/InputCaptcha';
 
 export const getServerSideProps: GetServerSideProps = shouldWithAuth(async ctx => {
   const { articleID } = ctx.query;
@@ -82,16 +84,25 @@ const Comment = (props: CommentProps) => {
   );
 };
 
+interface FormValues {
+  username: string;
+  content: string;
+  captcha: InputCaptchaValue;
+}
+
 function ArticleLayout(props: ArticleProps) {
   const {
     data: { article },
   } = props;
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState(props.data.comments);
   const [username, setUsername] = useState('');
-  const [content, setContent] = useState('');
-  const form = useRef<HTMLFormElement>(null);
+  const [form] = Form.useForm<FormValues>();
   const user = useSelector<State, User | null>(state => state.auth.user);
+  const initFormValue = {
+    username: user?.username ?? '匿名',
+  };
 
   useEffect(() => {
     const username = localStorage.getItem('username') ?? '';
@@ -108,18 +119,21 @@ function ArticleLayout(props: ArticleProps) {
     }
   };
 
-  const handleComment = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleFinish = async (values: FormValues) => {
     try {
       const { data } = await clientHttp.post<Comment>(`/api/articles/${article.id}/comments`, {
-        username,
-        content,
+        username: values.username,
+        content: values.content,
+        captchaKey: values.captcha.key,
+        captchaText: values.captcha.text,
       });
       setComments([...comments, data]);
-      setContent('');
+      form.resetFields();
       localStorage.setItem('username', username);
     } catch (error) {
       message.error(errorHandler(error));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -152,30 +166,20 @@ function ArticleLayout(props: ArticleProps) {
           </div>
         )}
         <div>
-          <form className="space-y-4" onSubmit={handleComment} ref={form}>
-            <div>
-              <Input
-                type="text"
-                placeholder="昵称"
-                required
-                value={username}
-                onChange={event => setUsername(event.target.value)}
-              />
-            </div>
-            <div>
-              <Input.Textarea
-                placeholder="写点什么吧..."
-                required
-                value={content}
-                onChange={event => setContent(event.target.value)}
-              ></Input.Textarea>
-            </div>
-            <div>
-              <Button type="indigo" htmlType="submit">
-                评论
-              </Button>
-            </div>
-          </form>
+          <Form form={form} initialValues={initFormValue} onFinish={handleFinish}>
+            <Field name="username" label="昵称" rules={[{ required: true }]}>
+              <Input type="text" placeholder="昵称" />
+            </Field>
+            <Field name="content" label="内容" rules={[{ required: true }]}>
+              <Input.Textarea placeholder="写点什么吧..."></Input.Textarea>
+            </Field>
+            <Field name="captcha" label="验证码">
+              <Input.Captcha placeholder="验证码"></Input.Captcha>
+            </Field>
+            <Button type="indigo" htmlType="submit">
+              评论
+            </Button>
+          </Form>
           <div className="space-y-2 mt-4">{commentList}</div>
         </div>
       </div>
