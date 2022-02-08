@@ -1,22 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { ParsedUrlQuery } from 'querystring';
 import { useSelector } from 'react-redux';
 import router from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
 import Dropdown, { DropdownOption } from 'components/base/Dropdown';
 import clientHttp from 'http/client';
-import message from 'components/base/message';
-import { errorHandler, mergeClassNames } from 'utils';
-import I from 'components/base/Icon';
-import avatar from 'assets/images/avatar.png';
-import Link from 'next/link';
-import Progress from 'components/base/Progress';
 import { State } from 'store';
 import { TaskID, UploadTask } from '@reducers/upload/interface';
+import { errorHandler, mergeClassNames } from 'utils';
+import message from 'components/base/message';
+import I from 'components/base/Icon';
+import Progress from 'components/base/Progress';
+import Breadcrumb from 'components/base/Breadcrumb';
+import avatar from 'assets/images/avatar.png';
+import { getDraft, getStorage } from 'api';
 
 const UploadButton = () => {
   const taskIDs = useSelector<State, TaskID[]>(state => state.upload.taskIDs);
   const taskMap = useSelector<State, Record<TaskID, UploadTask>>(state => state.upload.taskMap);
   const activeTaskIDs = taskIDs.filter(taskID => taskMap[taskID].loaded < taskMap[taskID].size);
+
   const percent = useMemo(() => {
     let total = 0;
     let loaded = 0;
@@ -81,6 +85,29 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
     ];
   }, []);
 
+  const getDefaultTextGenerator = useCallback((param: string) => {
+    return (
+      {
+        home: '总览',
+        drafts: '草稿箱',
+        articles: '文章管理',
+        categories: '分类管理',
+        storage: '存储管理',
+        edit: '编辑',
+        new: '新增',
+      }[param] || param
+    );
+  }, []);
+
+  const getTextGenerator = useCallback((param: string, query: ParsedUrlQuery) => {
+    return (
+      {
+        draftID: async () => (await getDraft(clientHttp)(query[param] as string)).data.title,
+        storageID: async () => (await getStorage(clientHttp)(query[param] as string)).data.name,
+      }[param] || null
+    );
+  }, []);
+
   return (
     <header className={mergeClassNames('flex justify-between items-center p-6', props.className)}>
       <div className="flex items-center space-x-4 lg:space-x-0">
@@ -90,8 +117,13 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
         >
           <I id="list"></I>
         </button>
-        <div>
-          <h1 className="text-2xl font-medium text-gray-800 dark:text-white">{props.title}</h1>
+        <div className="lg:text-2xl font-medium text-gray-800">
+          <Breadcrumb
+            omitroot
+            getDefaultTextGenerator={getDefaultTextGenerator}
+            getTextGenerator={getTextGenerator}
+          ></Breadcrumb>
+          <h1 className="text-2xl font-medium text-gray-800 dark:text-white"></h1>
         </div>
       </div>
 

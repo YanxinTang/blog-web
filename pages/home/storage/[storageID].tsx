@@ -8,33 +8,19 @@ import UploadButton from 'components/base/UploadButton';
 import { useDispatch } from 'react-redux';
 import { uploadFile } from '@reducers/upload';
 import message from 'components/base/message';
-
-interface GetStorageObjectsResponse {
-  CommonPrefixes: string | null;
-  Contents: FileObject[];
-  ContinuationToken: string | null;
-  Delimiter: string | null;
-  EncodingType: string | null;
-  IsTruncated: boolean;
-  KeyCount: number;
-  MaxKeys: number;
-  Name: string;
-  NextContinuationToken: string;
-  Prefix: string;
-  StartAfter: string | null;
-}
+import { getStorageObjects, GetStorageObjectsResponse } from 'api';
 
 export const getServerSideProps = withAuthServerSideProps(async ctx => {
-  const { id } = ctx.query;
+  const { storageID: id } = ctx.query;
   if (typeof id === 'string') {
     const storageID = parseInt(id);
     if (!Number.isNaN(storageID)) {
-      const { data } = await newHttp(ctx).get<GetStorageObjectsResponse>(`/api/admin/storages/${id}/objects`);
+      const { data } = await getStorageObjects(newHttp(ctx))(id);
       return {
         props: {
           data: {
             getStorageObjectsResponse: data,
-            storageID: id,
+            storageID,
           },
           meta: {
             title: '存储管理',

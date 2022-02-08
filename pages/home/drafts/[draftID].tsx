@@ -11,10 +11,10 @@ type CategoriesResponse = Category[];
 type DraftResponse = Article;
 
 export const getServerSideProps = withAuthServerSideProps(async ctx => {
-  const { id } = ctx.query;
+  const { draftID } = ctx.query;
   const response = await Promise.all([
     newHttp(ctx).get<CategoriesResponse>('/api/categories'),
-    newHttp(ctx).get<DraftResponse>(`/api/admin/drafts/${id}`),
+    newHttp(ctx).get<DraftResponse>(`/api/admin/drafts/${draftID}`),
   ]);
 
   return {
@@ -71,27 +71,6 @@ function NewArticle(props: NewArticleProps) {
 
   return (
     <div>
-      <nav className="bg-grey-light p-3 rounded w-full">
-        <ol className="list-reset flex text-grey-dark">
-          <li>
-            <a href="#" className="text-blue font-bold">
-              草稿箱
-            </a>
-          </li>
-          <li>
-            <span className="mx-2">/</span>
-          </li>
-          <li>
-            <a href="#" className="text-blue font-bold">
-              编辑
-            </a>
-          </li>
-          <li>
-            <span className="mx-2">/</span>
-          </li>
-          <li>{draft.title}</li>
-        </ol>
-      </nav>
       <form className="space-y-4" onSubmit={handlePublish}>
         <div>
           <input
