@@ -31,8 +31,6 @@ const authReducer: Reducer<UploadState> = (state = uploadInitState, action) => {
 
 export default authReducer;
 
-type PayloadType<T extends (...args: any) => any> = ReturnType<T>['payload'];
-
 function addStateTask(state: UploadState, payload: PayloadType<typeof addTask>): UploadState {
   const { taskIDs, taskMap: taskMap } = state;
   const task = payload;
