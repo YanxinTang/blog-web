@@ -34,6 +34,7 @@ specifiers:
   eslint-plugin-prettier: ^4.0.0
   husky: ^7.0.4
   imagemin-svgo: ^10.0.1
+  is-ci: ^3.0.1
   js-cookie: ^3.0.1
   lint-staged: ^12.2.0
   merge: ^2.1.1
@@ -87,6 +88,7 @@ dependencies:
   dayjs: 1.10.7
   dom-align: 1.12.2
   imagemin-svgo: 10.0.1
+  is-ci: 3.0.1
   js-cookie: 3.0.1
   merge: 2.1.1
   next: 12.0.10_a7e3e109dab229273edc89f3fe50a7f9
@@ -2782,6 +2784,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /ci-info/3.3.2:
+    resolution: {integrity: sha512-xmDt/QIAdeZ9+nfdPsaBCpMvHNLFiLdjj59qjqn+6iPe6YmHGQ35sBnQ8uslRBXFmXkiZQOJRjvQeoGppoTjjg==}
+    dev: false
+
   /class-utils/0.3.6:
     resolution: {integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==}
     engines: {node: '>=0.10.0'}
@@ -4359,6 +4365,13 @@ packages:
     resolution: {integrity: sha512-nsuwtxZfMX67Oryl9LCQ+upnC0Z0BgpwntpS89m1H/TLF0zNfzfLMV/9Wa/6MZsj0acpEjAO0KF1xT6ZdLl95w==}
     engines: {node: '>= 0.4'}
     dev: true
+
+  /is-ci/3.0.1:
+    resolution: {integrity: sha512-ZYvCgrefwqoQ6yTyYUbQu64HsITZ3NfKX1lzaEYdkTDcfKzzCI/wthRRYKkdjHKFVgNiXKAKm65Zo1pk2as/QQ==}
+    hasBin: true
+    dependencies:
+      ci-info: 3.3.2
+    dev: false
 
   /is-core-module/2.8.0:
     resolution: {integrity: sha512-vd15qHsaqrRL7dtH6QNuy0ndJmRDrS9HAM1CAiSifNUFv4x1a0CCVsj18hJ1mShxIG6T2i1sO78MkP56r0nYRw==}

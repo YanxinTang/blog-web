@@ -14,7 +14,7 @@ WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 
-ENV HUSKY=0
+ENV CI=true
 # https://github.com/webpack/webpack/issues/14532
 ENV NODE_OPTIONS --openssl-legacy-provider
 
