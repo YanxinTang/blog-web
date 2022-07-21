@@ -7,6 +7,8 @@ import Button from 'components/base/Button';
 import CreateModal from 'components/page/home/storage/CreateStorage';
 import EditModal from 'components/page/home/storage/EditStorage';
 import DeleteModal from 'components/page/home/storage/DeleteStorage';
+import Icon from 'components/base/Icon';
+import PopConfirm from 'components/base/PopConfirm';
 
 type GetStoragesResponse = Storage[];
 
@@ -33,21 +35,22 @@ const Item = (props: ItemProps) => {
 
   return (
     <tr>
-      <td className="px-6 py-4 whitespace-nowrap">
-        <Link href={`/home/storage/${storage.id}`} passHref>
+      <td className="px-6 py-4 text-overflow-ellipsis">
+        <Link href={`/home/storages/${storage.id}`} passHref>
           {storage.name}
         </Link>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">{storage.region}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{storage.bucket}</td>
-      <td className="px-6 py-4 whitespace-nowrap">{formatBytes(storage.capacity)}</td>
-      <td className="px-6 py-4 flex flex-row flex-nowrap justify-between">
-        <Button type="indigo" onClick={() => props.onChange(storage)}>
-          编辑
+      <td className="hidden md:table-cell px-6 py-4">{storage.bucket}</td>
+      <td className="px-6 py-4">{formatBytes(storage.capacity)}</td>
+      <td className="px-6 py-4 whitespace-nowrap space-x-2">
+        <Button theme="indigo" ghost title="编辑" onClick={() => props.onChange(storage)}>
+          <Icon id="pencil" />
         </Button>
-        <Button type="red" ghost onClick={() => props.onDelete(storage)}>
-          删除
-        </Button>
+        <PopConfirm title={`确定要删除${props.storage.name}吗？`}>
+          <Button theme="red" ghost title="删除" onClick={() => props.onDelete(storage)}>
+            <Icon id="trash" />
+          </Button>
+        </PopConfirm>
       </td>
     </tr>
   );
@@ -107,28 +110,24 @@ function Storages(props: CategoriesProps) {
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="space-x-2 mb-2">
-              <Button type="green" onClick={() => setCreateModalVisible(true)}>
+              <Button theme="green" title="添加" onClick={() => setCreateModalVisible(true)}>
                 添加
               </Button>
             </div>
-            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-full table-fixed divide-y divide-gray-200">
+            <div className="overflow-hidden rounded border border-gray-200">
+              <table className="w-full table-fixed">
                 <colgroup>
                   <col className="w-auto" />
+                  <col className="hidden md:table-cell w-auto" />
                   <col className="w-auto" />
-                  <col className="w-auto" />
-                  <col className="w-auto" />
-                  <col className="w-48" />
+                  <col className="w-auto md:w-48" />
                 </colgroup>
-                <thead className="bg-gray-50 text-left">
+                <thead className="bg-gray-50 text-left border-b boerder-gray-200">
                   <tr>
                     <th scope="col" className="px-6 py-3 uppercase tracking-wider">
                       名称
                     </th>
-                    <th scope="col" className="px-6 py-3 tracking-wider">
-                      区域
-                    </th>
-                    <th scope="col" className="px-6 py-3 tracking-wider">
+                    <th scope="col" className="hidden md:table-cell px-6 py-3 tracking-wider">
                       桶
                     </th>
                     <th scope="col" className="px-6 py-3 tracking-wider">

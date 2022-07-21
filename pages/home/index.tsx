@@ -5,6 +5,7 @@ import { newHttp } from 'http/server';
 import clientHttp from 'http/client';
 import Progress from 'components/base/Progress';
 import message from 'components/base/message';
+import { getStorageOverview, OverviewStorageList } from 'api';
 
 type OverviewResponse = Array<{ name: string; value: number }>;
 
@@ -52,20 +53,13 @@ interface HomeProps {
   data: OverviewResponse;
 }
 
-type OverviewStorageList = Array<{
-  id: number;
-  name: string;
-  usage: number;
-  capacity: number;
-}>;
-
 function Home(props: HomeProps) {
   const [overviewStorages, setOverviewStorages] = useState<OverviewStorageList>([]);
   useEffect(() => {
     let isMounted = true;
     (async () => {
       try {
-        const { data } = await clientHttp.get<OverviewStorageList>('/api/admin/overview/storage');
+        const { data } = await getStorageOverview(clientHttp)();
         if (isMounted) {
           setOverviewStorages(data);
         }

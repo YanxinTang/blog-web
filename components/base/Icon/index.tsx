@@ -1,15 +1,18 @@
 import React from 'react';
+import { mergeClassNames } from 'utils';
 import { IconID } from './import';
 
 interface IconProps {
   id: IconID;
-  size?: number;
+  width?: number;
+  height?: number;
+  className?: string;
 }
 
 export default function Icon(props: IconProps) {
-  const { id, size = 16 } = props;
+  const { id, width = 16, height = 16 } = props;
   return (
-    <svg className="sprite-icon" width={size} height={size} fill="currentColor">
+    <svg className={mergeClassNames('sprite-icon', props.className)} width={width} height={height} fill="currentColor">
       <use xlinkHref={`#${id}`} />
     </svg>
   );

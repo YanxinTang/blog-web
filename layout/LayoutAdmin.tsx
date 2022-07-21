@@ -40,7 +40,7 @@ export default function AdminLayout(props: LayoutProps) {
             className={mergeClassNames(styles.header, scrollY > 0 ? styles['header--shadow'] : '')}
             onToggle={handleToggleSidebar}
           ></Header.Admin>
-          <main className="flex-1 flex flex-col px-6 py-8">{props.children}</main>
+          <main className="flex-1 flex flex-col px-2 md:px-6 py-4">{props.children}</main>
         </div>
       </div>
     </div>

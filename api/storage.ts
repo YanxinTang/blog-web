@@ -1,5 +1,18 @@
 import { Axios } from 'axios';
 
+export type OverviewStorageList = Array<{
+  id: number;
+  name: string;
+  usage: number;
+  capacity: number;
+}>;
+
+export function getStorageOverview(http: Axios) {
+  return () => {
+    return http.get<OverviewStorageList>('/api/admin/overview/storage');
+  };
+}
+
 /*
  * 获取对象存储详细描述
  */

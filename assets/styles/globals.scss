@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'assets/styles/Modal.scss';
+@import '../../components/base/Tooltip/Tooltip.scss';
+
 html {
   font-family: 'Fira Code', -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, sans-serif;

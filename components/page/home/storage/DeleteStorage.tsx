@@ -35,10 +35,10 @@ export default function EditStorageModal(props: AddStorageModalProps) {
 
   const footer = (
     <div className="space-x-2">
-      <Button type="blue" onClick={handleFinish} disabled={loading}>
+      <Button theme="blue" onClick={handleFinish} disabled={loading}>
         确定
       </Button>
-      <Button type="blue" ghost onClick={handleClose}>
+      <Button theme="blue" ghost onClick={handleClose}>
         取消
       </Button>
     </div>

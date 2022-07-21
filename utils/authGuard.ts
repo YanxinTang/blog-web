@@ -35,7 +35,6 @@ export function withAuthServerSideProps(
 
     if (incomingGSSP) {
       const incomingGSSPResult = await incomingGSSP(ctx, user);
-
       if ('props' in incomingGSSPResult) {
         return {
           props: {
@@ -48,7 +47,6 @@ export function withAuthServerSideProps(
           },
         };
       }
-
       return incomingGSSPResult;
     }
 

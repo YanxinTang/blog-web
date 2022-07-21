@@ -27,7 +27,7 @@ export default function UploadButton(props: UploadButton) {
   };
 
   return (
-    <Button onClick={handleClick} type="green">
+    <Button onClick={handleClick} theme="green">
       {props.children}
       <input ref={inputRef} onChange={handleChange} type="file" multiple className="w-0 h-0 invisible" />
     </Button>

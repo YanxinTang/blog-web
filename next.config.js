@@ -21,8 +21,8 @@ module.exports = (phase, { defaultConfig }) => {
       async rewrites() {
         return [
           {
-            source: '/api/:path*',
-            destination: 'http://localhost:8000/api/:path*', // Proxy to Backend
+            source: '/backend/:path*',
+            destination: 'http://localhost:8000/:path*', // Proxy to Backend
           },
         ];
       },

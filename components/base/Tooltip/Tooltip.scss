@@ -1,0 +1,119 @@
+@use 'sass:math';
+
+$prefix-cls: blog-tooltip;
+$tooltip-arrow-size: 10px;
+$tooltip-arrow-size-half: math.div($tooltip-arrow-size, 2);
+$tooltip-arrow-inner-size: math.sqrt(2) * $tooltip-arrow-size-half;
+.#{$prefix-cls} {
+  position: absolute;
+  z-index: 50;
+  display: block;
+  visibility: visible;
+
+  &-hidden {
+    display: none;
+  }
+
+  &-inner {
+    @apply px-2 
+      py-4 
+      bg-white 
+      rounded
+      border;
+    text-align: left;
+    text-decoration: none;
+    min-height: 34px;
+  }
+
+  &-arrow {
+    position: absolute;
+    width: $tooltip-arrow-size;
+    height: $tooltip-arrow-size;
+    border-color: transparent;
+    border-style: solid;
+    overflow: hidden;
+  }
+
+  &-arrow-inner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: $tooltip-arrow-inner-size;
+    height: $tooltip-arrow-inner-size;
+    transform-origin: center;
+    background: #ffffff;
+    @apply border;
+  }
+
+  &-placement-right &-arrow,
+  &-placement-rightTop &-arrow,
+  &-placement-rightBottom &-arrow {
+    left: -$tooltip-arrow-size + 1px;
+
+    &-inner {
+      transform: translateX($tooltip-arrow-size-half) rotate(45deg);
+    }
+  }
+
+  &-placement-left &-arrow,
+  &-placement-leftTop &-arrow,
+  &-placement-leftBottom &-arrow {
+    right: -$tooltip-arrow-size + 1px;
+
+    &-inner {
+      transform: translateX(-$tooltip-arrow-size-half) rotate(45deg);
+    }
+  }
+
+  &-placement-right &-arrow,
+  &-placement-left &-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &-placement-rightTop &-arrow,
+  &-placement-leftTop &-arrow {
+    top: 15%;
+  }
+
+  &-placement-rightBottom &-arrow,
+  &-placement-leftBottom &-arrow {
+    bottom: 15%;
+  }
+
+  &-placement-top &-arrow,
+  &-placement-topLeft &-arrow,
+  &-placement-topRight &-arrow {
+    bottom: -$tooltip-arrow-size + 1px;
+
+    &-inner {
+      transform: translateY(-$tooltip-arrow-size-half) rotate(45deg);
+    }
+  }
+
+  &-placement-bottom &-arrow,
+  &-placement-bottomLeft &-arrow,
+  &-placement-bottomRight &-arrow {
+    top: -$tooltip-arrow-size + 1px;
+
+    &-inner {
+      transform: translateY($tooltip-arrow-size-half) rotate(45deg);
+    }
+  }
+
+  &-placement-top &-arrow,
+  &-placement-bottom &-arrow {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &-placement-topLeft &-arrow,
+  &-placement-bottomLeft &-arrow {
+    left: 15%;
+  }
+
+  &-placement-topRight &-arrow,
+  &-placement-bottomRight &-arrow {
+    right: 15%;
+  }
+}

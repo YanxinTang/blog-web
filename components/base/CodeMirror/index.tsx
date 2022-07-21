@@ -6,9 +6,9 @@ import markdownLang from './markdownLang';
 import theme from './theme';
 
 interface CodeMirrorProps {
-  value: string;
+  value?: string;
   className?: string;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
 }
 
 export default function CodeMirror(props: CodeMirrorProps) {
@@ -20,17 +20,17 @@ export default function CodeMirror(props: CodeMirrorProps) {
     return EditorView.updateListener.of((v: ViewUpdate) => {
       if (v.docChanged) {
         const doc = v.state.doc;
-        onChange(doc.toString());
+        onChange?.(doc.toString());
       }
     });
   }, [onChange]);
 
   useEffect(() => {
-    const height = editorViewRef.current?.clientHeight;
+    // const height = editorViewRef.current?.clientHeight;
 
     const state = EditorState.create({
       doc: value,
-      extensions: [basicSetup, markdownLang, onEditorChange(), theme({ height })],
+      extensions: [basicSetup, markdownLang, onEditorChange(), theme()],
     });
     editor.current = new EditorView({ state, parent: editorViewRef.current ?? undefined });
     return () => {

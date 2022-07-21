@@ -19,11 +19,11 @@ export default function Article(props: ArticleProps) {
         <div className={styles.articleHeaderMeta}>
           <div className={styles.articleHeaderCategory}>
             <i className="iconfont icon-tag"></i>
-            <span className="text-white bg-green-400 rounded px-2">{props.category.name}</span>
+            <span className="text-white bg-green-400 rounded px-2">{props.edges.category!.name}</span>
           </div>
           <div className={styles.articleHeaderDate}>
             <i className="iconfont icon-time"></i>
-            {props.createdAt}
+            {props.create_time}
           </div>
         </div>
       </div>

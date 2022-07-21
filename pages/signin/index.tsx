@@ -102,7 +102,7 @@ function Signin() {
             </div>
           </div>
           <div>
-            <Button type="indigo" htmlType="submit" block>
+            <Button theme="indigo" type="submit" block>
               登录
             </Button>
           </div>

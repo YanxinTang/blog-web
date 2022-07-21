@@ -1,39 +1,37 @@
+import { loadavg } from 'os';
 import React from 'react';
 import { mergeClassNames } from 'utils';
+import Icon from '../Icon';
 import styles from './Button.module.scss';
 
 type ButtonProps = React.PropsWithChildren<{
   className?: string;
-  type?: 'gray' | 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink';
+  type?: 'submit' | 'reset' | 'button';
+  disabled?: boolean;
+  htmlForm?: string;
+  title?: string;
+  theme?: 'gray' | 'red' | 'yellow' | 'green' | 'blue' | 'indigo' | 'purple' | 'pink';
   ghost?: boolean;
   block?: boolean;
-  htmlType?: 'submit' | 'reset' | 'button';
-  htmlForm?: string;
-  disabled?: boolean;
+  loading?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }>;
 
 const Button = (props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
-  const { children, className, block, ghost = false, type = 'info' } = props;
+  const { children, className, block, ghost = false, theme = 'info', htmlForm, loading, ...restProps } = props;
 
   const newClassName = mergeClassNames(
     styles.button,
-    styles[type],
+    styles[theme],
     ghost ? styles.ghost : '',
     block ? styles.block : '',
     className
   );
 
   return (
-    <button
-      ref={ref}
-      className={newClassName}
-      type={props.htmlType}
-      onClick={props.onClick}
-      form={props.htmlForm}
-      disabled={props.disabled}
-    >
-      {children}
+    <button ref={ref} className={newClassName} form={htmlForm} {...restProps}>
+      {loading && <Icon id="loading" width={32} className="absolute inset-0 m-auto" />}
+      <span style={{ visibility: loading ? 'hidden' : 'visible' }}>{children}</span>
     </button>
   );
 };

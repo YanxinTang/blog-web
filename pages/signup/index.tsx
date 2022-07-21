@@ -109,7 +109,7 @@ function Signup() {
             </div>
           </div>
           <div>
-            <Button type="indigo" htmlType="submit" block>
+            <Button theme="indigo" type="submit" block>
               注册
             </Button>
           </div>

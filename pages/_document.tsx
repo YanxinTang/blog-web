@@ -3,7 +3,6 @@ import type { DocumentContext } from 'next/document';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    // console.log(Document);
     return await Document.getInitialProps(ctx);
   }
 

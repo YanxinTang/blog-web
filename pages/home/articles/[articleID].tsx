@@ -1,35 +1,38 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import Button from 'components/base/Button';
+import CodeMirror from 'components/base/CodeMirror';
 import { errorHandler, withAuthServerSideProps } from 'utils';
-import { http } from 'http/server';
+import { newHttp } from 'http/server';
 import clientHttp from 'http/client';
 import message from 'components/base/message';
+import { useRouter } from 'next/router';
 import { layoutAdmin } from 'layout';
 import Form from 'components/base/Form';
 import Input from 'components/base/Input';
-import Button from 'components/base/Button';
-import CodeMirror from 'components/base/CodeMirror';
-import { createArticle, draftArticle, publishArticle, updateArticle } from 'api';
-import { useRouter } from 'next/router';
-import client from 'http/client';
+import { getArticle, updateArticle } from 'api';
 
 type CategoriesResponse = Category[];
 
 export const getServerSideProps = withAuthServerSideProps(async ctx => {
-  const { data } = await http.get<CategoriesResponse>('/api/categories');
+  const { articleID } = ctx.query;
+  const response = await Promise.all([
+    newHttp(ctx).get<CategoriesResponse>('/api/categories'),
+    getArticle(newHttp(ctx))(articleID as string),
+  ]);
+
   return {
     props: {
-      data: {
-        categories: data,
-      },
+      data: { categories: response[0].data, article: response[1].data },
       meta: {
-        title: '新增文章',
+        title: '编辑',
       },
     },
   };
 });
 
-interface NewArticleProps {
+interface EditArticleProps {
   data: {
+    article: Article;
     categories: CategoriesResponse;
   };
 }
@@ -40,54 +43,26 @@ interface FormValues {
   content: string;
 }
 
-function NewArticle(props: NewArticleProps) {
+function EditArticle(props: EditArticleProps) {
   const { data } = props;
 
   const [form] = Form.useForm<FormValues>();
-  const operation = useRef('publish');
-
-  const [articleID, setArticleID] = useState<number>(0);
   const router = useRouter();
 
   const initFormValues: FormValues = {
-    title: '',
-    categoryID: data.categories.length ? data.categories[0].id : -1,
-    content: '',
+    title: data.article.title,
+    categoryID: data.article.edges.category!.id,
+    content: data.article.content,
   };
 
   const handleFinish = async (values: FormValues) => {
     values.categoryID = parseInt(values.categoryID + '');
     try {
-      if (operation.current === 'publish') {
-        if (articleID === 0) {
-          await publishArticle(clientHttp)(values);
-        } else {
-          await updateArticle(clientHttp)(articleID, { ...values, status: 1 });
-        }
-        message.success({ message: '发布成功' });
-        router.push('/home/articles');
-      } else {
-        if (articleID === 0) {
-          const { data } = await draftArticle(clientHttp)(values);
-          setArticleID(data.id);
-        } else {
-          await updateArticle(clientHttp)(articleID, { ...values, status: 1 });
-        }
-        message.success({ message: '保存成功' });
-      }
+      await updateArticle(clientHttp)(data.article.id, values);
+      router.push('/home/articles');
     } catch (error) {
       message.error(errorHandler(error));
     }
-  };
-
-  const handlePublish = () => {
-    operation.current = 'publish';
-    form.submit();
-  };
-
-  const handleDraft = () => {
-    operation.current = 'draft';
-    form.submit();
   };
 
   const options = data.categories.map(c => (
@@ -110,15 +85,12 @@ function NewArticle(props: NewArticleProps) {
         <CodeMirror className="flex-1 border border-gray-300 rounded"></CodeMirror>
       </Form.Field>
       <div className="space-x-2">
-        <Button type="button" theme="indigo" onClick={handlePublish}>
-          发布
-        </Button>
-        <Button type="button" theme="green" ghost onClick={handleDraft}>
-          存草稿
+        <Button theme="indigo" type="submit">
+          保存
         </Button>
       </div>
     </Form>
   );
 }
 
-export default layoutAdmin(NewArticle);
+export default layoutAdmin(EditArticle);

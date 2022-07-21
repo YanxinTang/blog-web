@@ -46,10 +46,10 @@ export default function DeleteFile(props: DeleteFileProps) {
 
   const footer = (
     <div className="space-x-2">
-      <Button type="blue" onClick={handleFinish} disabled={loading}>
+      <Button theme="blue" onClick={handleFinish} disabled={loading}>
         确定
       </Button>
-      <Button type="blue" ghost onClick={handleClose}>
+      <Button theme="blue" ghost onClick={handleClose}>
         取消
       </Button>
     </div>
@@ -57,7 +57,7 @@ export default function DeleteFile(props: DeleteFileProps) {
 
   return (
     <Modal title={title} visible={visible} footer={footer} onClose={handleClose}>
-      <p>确定要删除「{props?.file?.Key}」，此操作将不可恢复？</p>
+      <p>确定要删除 {props?.file?.Key}？</p>
     </Modal>
   );
 }

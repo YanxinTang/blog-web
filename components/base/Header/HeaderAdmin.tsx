@@ -10,11 +10,11 @@ import { State } from 'store';
 import { TaskID, UploadTask } from '@reducers/upload/interface';
 import { errorHandler, mergeClassNames } from 'utils';
 import message from 'components/base/message';
-import I from 'components/base/Icon';
 import Progress from 'components/base/Progress';
 import Breadcrumb from 'components/base/Breadcrumb';
 import avatar from 'assets/images/avatar.png';
-import { getDraft, getStorage } from 'api';
+import { getArticle, getStorage } from 'api';
+import Icon from 'components/base/Icon';
 
 const UploadButton = () => {
   const taskIDs = useSelector<State, TaskID[]>(state => state.upload.taskIDs);
@@ -34,7 +34,7 @@ const UploadButton = () => {
 
   let child = (
     <span className="text-sm">
-      <I id="arrow-up-circle"></I>
+      <Icon id="cloud-arrow-up"></Icon>
     </span>
   );
   if (activeTaskIDs.length > 0) {
@@ -92,7 +92,8 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
         drafts: '草稿箱',
         articles: '文章管理',
         categories: '分类管理',
-        storage: '存储管理',
+        storages: '存储管理',
+        upload: '上传管理',
         edit: '编辑',
         new: '新增',
       }[param] || param
@@ -102,20 +103,17 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
   const getTextGenerator = useCallback((param: string, query: ParsedUrlQuery) => {
     return (
       {
-        draftID: async () => (await getDraft(clientHttp)(query[param] as string)).data.title,
+        articleID: async () => (await getArticle(clientHttp)(query[param] as string)).data.title,
         storageID: async () => (await getStorage(clientHttp)(query[param] as string)).data.name,
       }[param] || null
     );
   }, []);
 
   return (
-    <header className={mergeClassNames('flex justify-between items-center p-6', props.className)}>
+    <header className={mergeClassNames('flex justify-between items-center p-4', props.className)}>
       <div className="flex items-center space-x-4 lg:space-x-0">
-        <button
-          className="text-2xl text-gray-500 dark:text-gray-300 focus:outline-none lg:hidden"
-          onClick={() => props.onToggle?.(true)}
-        >
-          <I id="list"></I>
+        <button className="text-2xl text-gray-500 focus:outline-none lg:hidden" onClick={() => props.onToggle?.(true)}>
+          <Icon id="list" />
         </button>
         <div className="lg:text-2xl font-medium text-gray-800">
           <Breadcrumb
@@ -129,9 +127,6 @@ export default function HeaderAdmin(props: HeaderAdminProps) {
 
       <div className="flex items-center space-x-4">
         <UploadButton></UploadButton>
-        <button className="flex text-2xl text-gray-600 dark:text-gray-300 focus:outline-none" aria-label="Color Mode">
-          <I id="sun-fill"></I>
-        </button>
         {user && (
           <div className="relative">
             <Dropdown options={options}>

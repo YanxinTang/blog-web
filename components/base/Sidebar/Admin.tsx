@@ -15,9 +15,9 @@ export default function SidebarAdmin(props: SidebarAdminProps) {
             总览
           </a>
         </ActiveLink>
-        <ActiveLink href="/home/articles/new" activeClassName={styles.active} passHref>
+        <ActiveLink href="/home/articles" activeClassName={styles.active} passHref>
           <a className={styles.menu} onClick={() => props.onToggle?.(false)}>
-            新增文章
+            文章管理
           </a>
         </ActiveLink>
 
@@ -26,12 +26,8 @@ export default function SidebarAdmin(props: SidebarAdminProps) {
             分类管理
           </a>
         </ActiveLink>
-        <ActiveLink href="/home/drafts" activeClassName={styles.active} passHref>
-          <a className={styles.menu} onClick={() => props.onToggle?.(false)}>
-            草稿箱
-          </a>
-        </ActiveLink>
-        <ActiveLink href="/home/storage" activeClassName={styles.active} passHref>
+
+        <ActiveLink href="/home/storages" activeClassName={styles.active} passHref>
           <a className={styles.menu} onClick={() => props.onToggle?.(false)}>
             存储管理
           </a>

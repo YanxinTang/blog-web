@@ -26,13 +26,13 @@ export default function Crumb(props: CrumbProps) {
   }, [textGenerator, isMounted]);
 
   return (
-    <li className={last ? 'text-gray-800' : 'text-gray-400'}>
+    <li className={last ? 'text-gray-800' : 'text-gray-500'}>
       <span>
         {last ? (
           displayText
         ) : (
           <Link href={href}>
-            <a className="transition-colors hover:text-gray-500">{displayText}</a>
+            <a className="transition-colors hover:text-gray-600">{displayText}</a>
           </Link>
         )}
       </span>

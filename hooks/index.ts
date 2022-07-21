@@ -1,3 +1,2 @@
-import useIsMounted from './useIsMounted';
-
-export { useIsMounted };
+export { useIsMounted } from './useIsMounted';
+export { useReloadServerSideData } from './useReloadServerSideData';

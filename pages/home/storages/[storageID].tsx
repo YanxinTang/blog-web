@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { uploadFile } from '@reducers/upload';
 import message from 'components/base/message';
 import { getStorageObjects, GetStorageObjectsResponse } from 'api';
+import Icon from 'components/base/Icon';
 
 export const getServerSideProps = withAuthServerSideProps(async ctx => {
   const { storageID: id } = ctx.query;
@@ -49,12 +50,12 @@ const Item = (props: ItemProps) => {
         {file.Key}
       </td>
       <td className="px-6 py-4 whitespace-nowrap">{formatBytes(file.Size)}</td>
-      <td className="px-6 py-4 space-x-2">
-        <Button type="indigo" ghost onClick={() => props.onCopy(file)}>
-          复制链接
+      <td className="px-6 py-4 space-y-2 md:space-x-2">
+        <Button theme="indigo" ghost title="复制链接" onClick={() => props.onCopy(file)}>
+          <Icon id="clipboard" />
         </Button>
-        <Button type="red" ghost onClick={() => props.onDelete(file)}>
-          删除
+        <Button theme="red" ghost title="删除" onClick={() => props.onDelete(file)}>
+          <Icon id="trash"></Icon>
         </Button>
       </td>
     </tr>
@@ -116,10 +117,10 @@ const StorageList = (props: StorageListProps) => {
                     <th scope="col" className="w-auto px-6 py-4 uppercase tracking-wider">
                       名称
                     </th>
-                    <th scope="col" className="w-32 px-6 py-4 tracking-wider">
+                    <th scope="col" className="w-auto md:w-32 px-6 py-4 tracking-wider">
                       大小
                     </th>
-                    <th scope="col" className="w-64 px-6 py-4 tracking-wider">
+                    <th scope="col" className="w-auto md:w-48 px-6 py-4 tracking-wider">
                       操作
                     </th>
                   </tr>
