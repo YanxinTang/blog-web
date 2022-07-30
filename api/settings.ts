@@ -12,6 +12,15 @@ export function getPublicSettings(http: Axios) {
   };
 }
 
+export function getPublicsetting(http: Axios) {
+  return async (key: string) => {
+    const { data } = await getPublicSettings(http)([key])
+    return {
+      data: data[0]
+    }
+  }
+}
+
 export function getSettings(http: Axios) {
   return (keys: string[]) => {
     return http.get<Setting[]>('/api/admin/settings', { params: { keys } });

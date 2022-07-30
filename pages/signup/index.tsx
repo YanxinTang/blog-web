@@ -8,6 +8,7 @@ import { layout } from 'layout';
 import message from 'components/base/message';
 import Input from 'components/base/Input';
 import Button from 'components/base/Button';
+import { getPublicsetting } from 'api/settings';
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   try {
@@ -19,8 +20,8 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       },
     };
   } catch (error) {
-    const { data } = await newHttp(ctx).get('/api/setting', { params: { key: 'signupEnable' } });
-    const signupEnable: string = data.value;
+    const { data: setting } = await getPublicsetting(newHttp(ctx))('signupEnable');
+    const signupEnable: string = setting.value;
     if (signupEnable === '1') {
       return {
         props: {
