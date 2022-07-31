@@ -1,6 +1,6 @@
 .article {
   width: 100%;
-  border-bottom: 1px solid #e5e5e5;
+  /* border-bottom: 1px solid #e5e5e5; */
 }
 
 .articleHeader {
@@ -26,8 +26,7 @@
 }
 
 .articleBody {
-  margin: 1rem 0;
-  padding-top: 1rem;
+  margin: 1rem 0 2.5rem 0;
 }
 
 .article-body,
