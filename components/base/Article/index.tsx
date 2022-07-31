@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styles from './Article.module.css';
 import { mergeClassNames } from 'utils';
+import { datetimeFormatter } from 'utils/date';
 
 export interface ArticleProps extends Article {}
 
@@ -23,7 +24,7 @@ export default function Article(props: ArticleProps) {
           </div>
           <div className={styles.articleHeaderDate}>
             <i className="iconfont icon-time"></i>
-            {props.create_time}
+            {datetimeFormatter(props.create_time)}
           </div>
         </div>
       </div>
